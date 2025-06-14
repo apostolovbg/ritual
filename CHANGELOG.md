@@ -29,3 +29,9 @@ All notable changes to this project will be documented in this file.
 - Development summary in `AGENTS.md` outlining completed phases and Phase 3 goals.
 - Updated `README.md` with roadmap section.
 - Recorded this change in the changelog.
+
+## [0.5.0] - 2025-06-14
+### Added
+- Formal version tracking initiated.
+- Updated documentation to reflect current version.
+

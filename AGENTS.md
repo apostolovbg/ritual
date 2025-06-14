@@ -16,6 +16,8 @@ This repository follows **AGENTS.json** as the canonical specification for the R
 
 Phase 0 established the repository and documentation structure. Phase 1 added user authentication with JWT and profile management. Phase 2 built event and booking functionality with accompanying tests. Each phase is recorded in `CHANGELOG.md`.
 
+Version 0.5.0 begins formal version tracking for all future changes.
+
 ## Next Steps (Phase 3)
 
 Prepare for deployment on a hosting platform such as Render or Railway. Add Docker configuration and CI workflow updates. Ensure environment variables are managed securely. Continue updating documentation and tests with every change and avoid merge conflict markers like `<<<<<<<` in any file.
