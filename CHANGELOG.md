@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.7.1] - 2025-06-14
+### Added
+- Documented immediate next tasks: implementing CORS, CSRF protection,
+  rate limiting, and GDPR/CDPA compliance measures.
+- Noted the need for network access to `pypi.org` and `files.pythonhosted.org`
+  when installing dependencies. Updated README to version 0.7.1.
+
 ## [0.7] - 2025-06-14
 ### Added
 - Completed Phase 3 with deployment documentation and version updates.

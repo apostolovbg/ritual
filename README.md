@@ -1,6 +1,6 @@
 # RITUAL Backend
 
-**Version 0.7**
+**Version 0.7.1**
 
 This repository contains the backend API for the RITUAL platform. The project follows a backend-first strategy. Previous design details from `AGENTS.json` have been folded into the documentation and the file has been removed.
 
@@ -8,11 +8,12 @@ This repository contains the backend API for the RITUAL platform. The project fo
 
 1. Create a virtual environment and install dependencies:
 
- ```bash
- python -m venv venv
- source venv/bin/activate
- pip install -r requirements.txt
- ```
+```bash
+python -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
+Ensure the environment can access `pypi.org` and `files.pythonhosted.org` to download packages.
 2. Copy `.env.example` to `.env` and adjust values if needed. Only `DATABASE_URL` and `SECRET_KEY` are required when not using the defaults.
 
 3. Run tests:
@@ -87,4 +88,5 @@ The project has progressed through the initial phases defined by the original de
 - **Phase 2** – Event management and booking endpoints with tests.
 - **Phase 3** – Deployment readiness with Docker and CI.
 
-Version 0.7 finalizes deployment readiness with Docker support, CI automation, and environment variable management.
+Version 0.7.1 finalizes deployment readiness with Docker support, CI automation, and environment variable management. The immediate next tasks are implementing CORS and CSRF protection, adding rate limiting, and addressing GDPR/CDPA compliance.
+
