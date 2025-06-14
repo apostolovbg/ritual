@@ -17,3 +17,9 @@ All notable changes to this project will be documented in this file.
 - `requirements.txt` listing dependencies.
 ### Changed
 - Expanded `README.md` with setup instructions.
+
+## [0.3.0] - 2025-06-14
+### Added
+- Event and booking modules with CRUD endpoints.
+- Tests covering event creation and booking flow.
+- Updated documentation for Phase 2 instructions.

@@ -10,4 +10,5 @@ This repository follows **AGENTS.json** as the canonical specification for the R
 - Update `README.md` and `CHANGELOG.md` with every meaningful change.
 - Document development history thoroughly.
 - Phase 1 focuses on user authentication and profile management.
+- Phase 2 introduces event creation and booking endpoints. Continue updating docs with each change.
 
