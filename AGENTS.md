@@ -15,14 +15,13 @@
 
 Phase 0 established the repository and documentation structure. Phase 1 added user authentication with JWT and profile management. Phase 2 built event and booking functionality with accompanying tests. Each phase is recorded in `CHANGELOG.md`.
 
-Version 0.6a introduced a browser-based test runner. Version 0.6b adds Docker support, environment variable loading from `.env`, and a CI workflow.
+Version 0.6a introduced a browser-based test runner. Version 0.6b adds Docker support, environment variable loading from `.env`, and a CI workflow. Version 0.7 finalizes Phase 3 with deployment documentation and version updates.
 
-## Next Steps (Phase 3)
+## Phase 3 Complete
 
-Phase 3 focuses on deployment readiness:
+Deployment readiness is implemented with Docker support, `.dockerignore`, a CI workflow running `pytest`, and configuration loading from `.env`. Documentation now covers container usage and environment variables.
 
-- Add a `Dockerfile` and `.dockerignore` for containerized runs.
-- Provide a GitHub Actions workflow that runs `pytest` on every push.
-- Load configuration from a `.env` file when present.
-- Document deployment instructions and keep tests passing.
+## Next Steps
+
+Phase 4 planning will outline additional features and improvements beyond deployment.
 
