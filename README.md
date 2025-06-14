@@ -1,8 +1,8 @@
 # RITUAL Backend
 
-**Version 0.5.0**
+**Version 0.6a**
 
-This repository contains the backend API for the RITUAL platform. The project follows a backend-first approach described in `AGENTS.json`.
+This repository contains the backend API for the RITUAL platform. The project follows the backend-first strategy defined in `AGENTS.json`.
 
 ## Setup
 
@@ -26,6 +26,16 @@ pytest -q
 uvicorn app.main:app --reload
 ```
 
+## Web-Based Test Runner
+
+A simple test runner is available under `test/index.html`. Serve the repository with Python's built-in web server and open the page in your browser:
+
+```bash
+python -m http.server
+```
+
+Then visit `http://localhost:8000/test/index.html` and click **Run Tests** to execute the suite using Pyodide.
+
 ## Documentation
 
 - `AGENTS.md` contains development guidelines.
@@ -35,8 +45,6 @@ uvicorn app.main:app --reload
 
 Phase 1 delivered user authentication. Phase 2 added event creation and booking requests. Main routes include:
 
-Phase 1 delivers user authentication. Phase 2 adds event creation and booking requests. Main routes include:
-
 - `POST /register` — create a user
 - `POST /login` — obtain a JWT token
 - `GET /me` — fetch the current user
@@ -45,18 +53,15 @@ Phase 1 delivers user authentication. Phase 2 adds event creation and booking re
 - `GET /events` — list events
 - `GET /events/{id}` — get a single event
 - `POST /bookings` — request booking (artist only)
- - `GET /my-bookings` — view bookings for the current user
+- `GET /my-bookings` — view bookings for the current user
 
 ## Development Roadmap
 
-The project has progressed through the initial phases of the plan defined in `AGENTS.json`:
+The project has progressed through the initial phases defined in `AGENTS.json`:
 
 - **Phase 0** – Repository setup with documentation and tests.
 - **Phase 1** – User registration, login and profile management.
 - **Phase 2** – Event management and booking endpoints with tests.
+- **Phase 3** – Preparing for deployment on Render or Railway.
 
-Next up is **Phase 3**, which focuses on preparing deployment via a provider such as Render or Railway. Docker setup and CI workflows will be introduced.
-
-Version 0.5.0 marks the beginning of formal version tracking for this repository.
-
-- `GET /my-bookings` — view bookings for the current user
+Version 0.6a marks the addition of a browser-based test runner.

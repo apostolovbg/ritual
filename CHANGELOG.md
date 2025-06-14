@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.6a] - 2025-06-14
+### Added
+- Browser-based test runner using Pyodide (`test/index.html`).
+- Documentation updated to version 0.6a.
+
 ## [0.1.0] - 2025-06-14
 ### Added
 - Initial repository with `AGENTS.json` and placeholder README.
@@ -34,4 +39,3 @@ All notable changes to this project will be documented in this file.
 ### Added
 - Formal version tracking initiated.
 - Updated documentation to reflect current version.
-
