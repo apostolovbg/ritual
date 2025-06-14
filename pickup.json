@@ -1,0 +1,261 @@
+{
+  "pickup.md": {
+    "title": "RITUAL V1: Underground Music Ecosystem Platform",
+    "concept_overview": "RITUAL V1 is a decentralized, AI-assisted, and community-driven platform that connects artists, clubs, and fans in the underground music scene. It empowers artists to grow their careers, helps clubs discover talent and manage events, and engages fans as active participants in the music ecosystem. The platform is designed to be user-friendly, scalable, and future-ready, with plans for AI integration, blockchain-based token economy, and immersive experiences like AR/VR tours.",
+    "core_purpose": "To create a sustainable, inclusive, and dynamic space where:\n- Artists can build their presence, get career advice, and book gigs.\n- Clubs can find talent, manage bookings, and track performance.\n- Fans can discover new music, support artists, and explore global scenes.",
+    "key_user_groups": [
+      "Artist: Emerging or established musicians, DJs, producers",
+      "Club: Independent venues, underground music spaces",
+      "Fan: Music lovers, collectors, community builders"
+    ],
+    "platform_structure": {
+      "artist_module": [
+        "Profile creation",
+        "AI career advisor",
+        "Smart portfolio builder",
+        "Booking requests",
+        "Referral system",
+        "Pro plan with unlimited features"
+      ],
+      "club_module": [
+        "Venue profile",
+        "AI talent curation",
+        "Direct booking system",
+        "Performance analytics",
+        "Lineup builder",
+        "Referral system"
+      ],
+      "fan_module": [
+        "Personalized discoveries",
+        "Community connection",
+        "Direct artist support",
+        "Event discovery",
+        "Immersive experiences (AR/VR)",
+        "Referral system"
+      ]
+    },
+    "key_functionalities": {
+      "artists": [
+        "Profile creation with social integration",
+        "AI career advisor with insights",
+        "Smart portfolio (basic and pro versions)",
+        "Booking requests to clubs",
+        "Referral system with token rewards",
+        "Pro plan includes unlimited gigs, direct monetization, and no commission"
+      ],
+      "clubs": [
+        "Venue profile with location and capacity",
+        "AI talent curation based on audience behavior",
+        "Direct booking system with limited personal info",
+        "Performance analytics for attendance and revenue",
+        "Lineup builder with audience overlap analysis",
+        "Referral system with token rewards"
+      ],
+      "fans": [
+        "Personalized music and event recommendations",
+        "Genre-specific communities and forums",
+        "Support for artists via memberships and exclusive content",
+        "Event discovery by genre, location, and artist",
+        "Immersive experiences (virtual venue tours)",
+        "Global map of underground scenes",
+        "Referral system with token rewards"
+      ]
+    },
+    "technology_stack": {
+      "frontend": [
+        "React.js / Next.js (web)",
+        "Flutter / React Native (mobile)",
+        "Tailwind CSS / Material UI (UI)"
+      ],
+      "backend": [
+        "Node.js / FastAPI (Python)",
+        "Express.js / Django",
+        "GraphQL / RESTful APIs"
+      ],
+      "database": [
+        "PostgreSQL (relational data)",
+        "MongoDB (unstructured data)",
+        "Neo4j (graph relationships)"
+      ],
+      "ai_ml": [
+        "TensorFlow / PyTorch",
+        "Hugging Face Transformers",
+        "Scikit-learn"
+      ],
+      "blockchain": [
+        "Solidity (smart contracts)",
+        "Ethereum / Solana (tokens)",
+        "IPFS/Filecoin (file storage)"
+      ],
+      "third_party_integrations": [
+        "Social media login (Google, Apple, Facebook)",
+        "Payment gateways (Stripe, PayPal)",
+        "Email marketing (Mailchimp, SendGrid)",
+        "Analytics tools (Google Analytics, Mixpanel)",
+        "Cloud storage (AWS S3, Firebase)"
+      ],
+      "security_compliance": [
+        "SSL/TLS encryption",
+        "Two-factor authentication (2FA)",
+        "GDPR, CCPA, SOC 2 Type II, ISO 27001 compliance",
+        "Zero-knowledge proofs for privacy",
+        "Access control via smart contracts"
+      ]
+    },
+    "subscription_plans": {
+      "free": {
+        "price": "$0/month",
+        "features": [
+          "Basic access to core modules",
+          "Limited AI advisor",
+          "No token rewards",
+          "No smart contracts"
+        ]
+      },
+      "basic": {
+        "price": "$5–$10/month",
+        "features": [
+          "Enhanced AI career advisor",
+          "Smart portfolio (basic)",
+          "Booking request feature",
+          "Token rewards (e.g., 5 tokens per referral)"
+        ]
+      },
+      "plus": {
+        "price": "$15–$25/month",
+        "features": [
+          "Advanced AI advisor",
+          "Smart contract demo (testnet)",
+          "Lineup builder",
+          "Exclusive content access",
+          "Token rewards (e.g., 10 tokens per referral)"
+        ]
+      },
+      "pro_plus": {
+        "price": "$30–$50/month",
+        "features": [
+          "Full smart contract integration",
+          "Unlimited gigs for artists",
+          "Direct fan monetization",
+          "Tour builder with sustainability tracking",
+          "AR/VR immersive experiences",
+          "Token-based governance voting"
+        ]
+      }
+    },
+    "roadmap": {
+      "phase_1": {
+        "focus": "MVP Launch (0–3 Months)",
+        "details": [
+          "Artist, Club, Fan MVPs",
+          "Basic features only"
+        ]
+      },
+      "phase_2": {
+        "focus": "Core Features Expansion (3–6 Months)",
+        "details": [
+          "Smart Contracts",
+          "Governance Voting",
+          "Referral System"
+        ]
+      },
+      "phase_3": {
+        "focus": "AI & Immersive Experiences (6–9 Months)",
+        "details": [
+          "AI Advisor",
+          "AR/VR Tours",
+          "Tour Builder"
+        ]
+      },
+      "phase_4": {
+        "focus": "Global Expansion (9–12 Months)",
+        "details": [
+          "Global Map",
+          "International Clubs",
+          "Multi-language Support"
+        ]
+      },
+      "phase_5": {
+        "focus": "Full Blockchain Integration (12–18 Months)",
+        "details": [
+          "Token-based governance",
+          "Secure data storage",
+          "Smart contracts for all transactions"
+        ]
+      },
+      "phase_6": {
+        "focus": "Ecosystem Growth (18+ Months)",
+        "details": [
+          "Community-driven decisions",
+          "Direct monetization tools",
+          "AI-powered event planning"
+        ]
+      }
+    },
+    "technical_architecture": {
+      "architecture_type": "Microservices + Serverless + Blockchain Integration",
+      "components": {
+        "frontend": [
+          "React.js / Next.js (web)",
+          "Flutter / React Native (mobile)",
+          "Tailwind CSS / Framer Motion (UI)"
+        ],
+        "backend_services": [
+          "User Management Service (OAuth 2.0, JWT)",
+          "AI Assistant Service (Career Advisor, Talent Curation)",
+          "Booking & Event Service (Stripe/PayPal, Smart Contracts)",
+          "Analytics Service (Pandas, NumPy)",
+          "Community & Messaging Service (WebSocket, Firebase)",
+          "Governance & Token Service (ERC-20/SPL, IPFS)"
+        ],
+        "database": [
+          "PostgreSQL (relational data)",
+          "MongoDB (unstructured data)",
+          "Neo4j (graph relationships)"
+        ],
+        "ai_ml": [
+          "Career Advisor AI (NLP + ML)",
+          "Talent Curation AI (Recommendation Engine + Clustering)",
+          "Event Recommendation AI (Collaborative Filtering + Deep Learning)",
+          "Performance Analytics AI (Time Series Forecasting)"
+        ],
+        "blockchain": [
+          "Smart Contracts (Solidity/Rust)",
+          "Token Economy (ERC-20/Solana SPL)",
+          "Decentralized Identity (DID)",
+          "IPFS/Filecoin (storage)"
+        ],
+        "third_party": [
+          "Google/Facebook/Apple Login",
+          "Stripe/PayPal",
+          "SendGrid/Mailchimp",
+          "Mixpanel/Hotjar",
+          "AWS S3/GCP Storage",
+          "Zendesk/Intercom"
+        ],
+        "security": [
+          "SSL/TLS encryption",
+          "2FA",
+          "Regular security audits",
+          "DDoS protection",
+          "Penetration testing"
+        ]
+      }
+    },
+    "compliance": {
+      "gdpr": "EU users - consent, data minimization, user rights",
+      "ccpa": "California users - right to know, opt-out, deletion",
+      "soc_2_type_ii": "Security, availability, integrity, confidentiality",
+      "iso_27001": "Information security management"
+    },
+    "future_enhancements": [
+      "Token economy for rewards and governance",
+      "AR/VR experiences (WebXR)",
+      "Tour builder with sustainability metrics",
+      "Multi-language support",
+      "Voice assistant integration",
+      "Cross-platform mobile apps"
+    ],
+    "development_readiness": "This file provides a complete starting point for development. Use it to set up sprints, define user stories, build mockups, and create technical specs and API docs."
+  }
+}
