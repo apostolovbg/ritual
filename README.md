@@ -35,6 +35,8 @@ uvicorn app.main:app --reload
 
 Phase 1 delivered user authentication. Phase 2 added event creation and booking requests. Main routes include:
 
+Phase 1 delivers user authentication. Phase 2 adds event creation and booking requests. Main routes include:
+
 - `POST /register` — create a user
 - `POST /login` — obtain a JWT token
 - `GET /me` — fetch the current user
@@ -57,3 +59,4 @@ Next up is **Phase 3**, which focuses on preparing deployment via a provider suc
 
 Version 0.5.0 marks the beginning of formal version tracking for this repository.
 
+- `GET /my-bookings` — view bookings for the current user

@@ -34,3 +34,4 @@ All notable changes to this project will be documented in this file.
 ### Added
 - Formal version tracking initiated.
 - Updated documentation to reflect current version.
+
