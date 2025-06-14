@@ -1,6 +1,8 @@
 # RITUAL Backend
 
 This repository contains the backend API for the RITUAL platform. The project follows a backend-first approach described in `AGENTS.json`.
+This repository contains the backend API for the RITUAL platform. The project fo
+llows a backend-first approach described in `AGENTS.json`.
 
 ## Setup
 
@@ -42,4 +44,3 @@ Phase 1 delivers user authentication. Phase 2 adds event creation and booking re
 - `GET /events/{id}` — get a single event
 - `POST /bookings` — request booking (artist only)
 - `GET /my-bookings` — view bookings for the current user
-
