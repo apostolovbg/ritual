@@ -7,6 +7,14 @@ All notable changes to this project will be documented in this file.
 - Browser-based test runner using Pyodide (`test/index.html`).
 - Documentation updated to version 0.6a.
 
+## [0.6b] - 2025-06-14
+### Added
+- Dockerfile and `.dockerignore` for container deployments.
+- GitHub Actions workflow running the test suite.
+- `.env.example` and environment variable loading in configuration.
+- Documentation updates reflecting removal of `AGENTS.json`.
+- CI and Docker instructions in README.
+
 ## [0.1.0] - 2025-06-14
 ### Added
 - Initial repository with `AGENTS.json` and placeholder README.
