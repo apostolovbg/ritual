@@ -23,3 +23,9 @@ All notable changes to this project will be documented in this file.
 - Event and booking modules with CRUD endpoints.
 - Tests covering event creation and booking flow.
 - Updated documentation for Phase 2 instructions.
+
+## [0.4.0] - 2025-06-14
+### Added
+- Development summary in `AGENTS.md` outlining completed phases and Phase 3 goals.
+- Updated `README.md` with roadmap section.
+- Recorded this change in the changelog.

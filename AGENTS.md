@@ -12,3 +12,11 @@ This repository follows **AGENTS.json** as the canonical specification for the R
 - Phase 1 focuses on user authentication and profile management.
 - Phase 2 introduces event creation and booking endpoints. Continue updating docs with each change.
 
+## Development History
+
+Phase 0 established the repository and documentation structure. Phase 1 added user authentication with JWT and profile management. Phase 2 built event and booking functionality with accompanying tests. Each phase is recorded in `CHANGELOG.md`.
+
+## Next Steps (Phase 3)
+
+Prepare for deployment on a hosting platform such as Render or Railway. Add Docker configuration and CI workflow updates. Ensure environment variables are managed securely. Continue updating documentation and tests with every change and avoid merge conflict markers like `<<<<<<<` in any file.
+
