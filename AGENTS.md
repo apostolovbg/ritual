@@ -15,7 +15,7 @@
 
 Phase 0 established the repository and documentation structure. Phase 1 added user authentication with JWT and profile management. Phase 2 built event and booking functionality with accompanying tests. Each phase is recorded in `CHANGELOG.md`.
 
-Version 0.6a introduced a browser-based test runner. Version 0.6b adds Docker support, environment variable loading from `.env`, and a CI workflow. Version 0.7 finalizes Phase 3 with deployment documentation and version updates.
+Version 0.6a introduced a browser-based test runner. Version 0.6b adds Docker support, environment variable loading from `.env`, and a CI workflow. Version 0.7 finalizes Phase 3 with deployment documentation and version updates. Version 0.7.2 removes the unfinished test suite and related documentation.
 
 ## Phase 3 Complete
 
