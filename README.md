@@ -1,6 +1,8 @@
 # RITUAL Backend
 
 This repository contains the backend API for the RITUAL platform. The project follows a backend-first approach described in `AGENTS.json`.
+This repository contains the backend API for the RITUAL platform. The project fo
+llows a backend-first approach described in `AGENTS.json`.
 
 ## Setup
 
@@ -32,6 +34,7 @@ uvicorn app.main:app --reload
 ## Endpoints
 
 Phase 1 delivered user authentication. Phase 2 added event creation and booking requests. Main routes include:
+Phase 1 delivers user authentication. Phase 2 adds event creation and booking requests. Main routes include:
 
 - `POST /register` — create a user
 - `POST /login` — obtain a JWT token
@@ -53,3 +56,4 @@ The project has progressed through the initial phases of the plan defined in `AG
 
 Next up is **Phase 3**, which focuses on preparing deployment via a provider such as Render or Railway. Docker setup and CI workflows will be introduced.
 
+- `GET /my-bookings` — view bookings for the current user
