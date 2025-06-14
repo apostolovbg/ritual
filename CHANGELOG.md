@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.7] - 2025-06-14
+### Added
+- Completed Phase 3 with deployment documentation and version updates.
+
 ## [0.6a] - 2025-06-14
 ### Added
 - Browser-based test runner using Pyodide (`test/index.html`).
