@@ -1,23 +1,33 @@
 # RITUAL Project Agent Guidelines
 
-This document is the canonical specification for the project. The former `AGENTS.json` file was removed when the stack switched from Python to Node.js. Follow the rules below when contributing.
+This repository follows **AGENTS.json** as the canonical specification for the RITUAL backend. Key points:
 
-## Core Rules
-- Use **Express.js** with **SQLite** for local development. JWT tokens handle authentication.
-- Keep code organized by feature modules (e.g., `users`, `events`).
-- Provide automated tests with **jest** for backend and frontend code.
-- Comment logic clearly and explain design choices within the code.
-- Summarize every change in `CHANGELOG.md` with the format `YYYY-MM-DD: short summary (author)`.
-- **Documentation Law**: update `README.md`, `CHANGELOG.md`, `TODO.md` and any related docs with every commit so they always describe the current state and future plans. Keeping documentation accurate is part of every task.
-- Never add merge conflict markers (`<<<<<<<`, `=======`, `>>>>>>>`).
-- Maintain modular, well-structured code that follows best practices.
+- Treat `AGENTS.json` as read-only authoritative instructions.
+- The historical file `pickup.json` has been removed. Always follow `AGENTS.json` for current requirements.
+- Use **Express.js** with **SQLite** for local deployments. Auth via OAuth2 style JWT tokens.
+- Organize code by feature modules (e.g., `users`).
+- Provide automated tests with `jest` for all endpoints.
+- Update `README.md` and `CHANGELOG.md` with every meaningful change.
+- Document development history thoroughly.
+- Phase 1 focuses on user authentication and profile management.
+- Phase 2 introduces event creation and booking endpoints. Continue updating docs with each change.
+- Comment code extensively in clear, human-readable language. Explain reasoning behind logic and design choices directly in the code.
+- Summarize every change in `CHANGELOG.md` using the format `YYYY-MM-DD: short summary (author)`.
+- Update documentation, including this file and `README.md`, whenever behavior or structure changes.
+- Never insert merge conflict markers like `<<<<<<<`, `=======`, or `>>>>>>>` in any file.
+- Keep code modular, well-structured and in line with best development practices.
 
 ## Development History
-- **Phase 0** – Repository and documentation structure established.
-- **Phase 1** – User authentication and profile management.
-- **Phase 2** – Event creation and booking endpoints with tests.
-- **Phase 3** – Docker configuration and CI workflow for deployment prep.
-- **Phase 4** – React frontend added.
-- **Version 1.2.2** – Removed all Python-era files; project is fully Node.js/React.
 
-Future milestones are tracked in `TODO.md`.
+Phase 0 established the repository and documentation structure. Phase 1 added user authentication with JWT and profile management. Phase 2 built event and booking functionality with accompanying tests. Each phase is recorded in `CHANGELOG.md`.
+
+Version 1.0.0 completes the migration to a JavaScript stack using Express.js. The previous Python code remains in history but is no longer maintained.
+
+## Next Steps (Phase 3)
+
+Prepare for deployment on a hosting platform such as Render or Railway. Docker configuration and a CI workflow are now included. Environment variables must be managed securely using a `.env` file that is never committed. Continue updating documentation and tests with every change and avoid merge conflict markers like `<<<<<<<` in any file.
+
+## Semantic Versioning
+
+All components now follow [Semantic Versioning](https://semver.org). Versions use the `MAJOR.MINOR.PATCH` format. Breaking changes increment the major version, new backwards compatible features increment the minor version, and bug fixes increment the patch version. The upcoming JavaScript refactor will launch as **1.0.0**.
+
