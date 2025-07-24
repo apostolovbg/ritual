@@ -1,6 +1,6 @@
 {
   "name": "ritual",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "RITUAL backend (Node.js version)",
   "main": "index.js",
   "directories": {
@@ -28,6 +28,8 @@
     "babel-jest": "^30.0.5",
     "@babel/preset-env": "^7.23.0",
     "@babel/preset-react": "^7.23.3",
-    "identity-obj-proxy": "^3.0.0"
+    "identity-obj-proxy": "^3.0.0",
+    "@testing-library/react": "^14.0.0",
+    "@testing-library/jest-dom": "^5.16.5"
   }
 }

@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.1] - 2025-07-27
+### Fixed
+- Added missing testing library dependencies.
+- Updated version number and documentation.
+
 ## [1.2.0] - 2025-07-26
 ### Added
 - React frontend with basic forms for registration, login, profile editing, event creation and booking.
