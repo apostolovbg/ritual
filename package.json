@@ -1,6 +1,6 @@
 {
   "name": "ritual",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "description": "RITUAL web application",
   "main": "index.js",
   "directories": {
