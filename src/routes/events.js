@@ -42,6 +42,34 @@ router.post('/events', auth, async (req, res) => {
   res.json(event);
 });
 
+// Allow club users to update their events
+router.put('/events/:id', auth, async (req, res) => {
+  if (req.user.role !== 'club') return res.status(403).json({ error: 'Only clubs can edit events' });
+  const db = await dbPromise;
+  const existing = await db.get('SELECT * FROM events WHERE id = ?', req.params.id);
+  if (!existing || existing.club_id !== req.user.id) return res.sendStatus(404);
+  const { title, date, start_time, end_time, location, genres } = req.body;
+  await db.run(
+    `UPDATE events SET 
+      title = COALESCE(?, title),
+      date = COALESCE(?, date),
+      start_time = COALESCE(?, start_time),
+      end_time = COALESCE(?, end_time),
+      location = COALESCE(?, location),
+      genres = COALESCE(?, genres)
+     WHERE id = ?`,
+    title,
+    date,
+    start_time,
+    end_time,
+    location,
+    genres,
+    req.params.id
+  );
+  const updated = await db.get('SELECT * FROM events WHERE id = ?', req.params.id);
+  res.json(updated);
+});
+
 // List all upcoming events
 router.get('/events', async (req, res) => {
   const db = await dbPromise;

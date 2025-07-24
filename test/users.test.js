@@ -20,3 +20,21 @@ it('registers and logs in user', async () => {
   expect(me.statusCode).toBe(200);
   expect(me.body.email).toBe('user@example.com');
 });
+
+it('updates and retrieves profile', async () => {
+  await request(app)
+    .put('/me/profile')
+    .set('Authorization', `Bearer ${token}`)
+    .send({ given_name: 'A', family_name: 'B', bio: 'Bio' });
+  const profile = await request(app)
+    .get('/me/profile')
+    .set('Authorization', `Bearer ${token}`);
+  expect(profile.statusCode).toBe(200);
+  expect(profile.body.given_name).toBe('A');
+});
+
+it('lists artists', async () => {
+  const res = await request(app).get('/artists');
+  expect(res.statusCode).toBe(200);
+  expect(res.body.length).toBeGreaterThan(0);
+});

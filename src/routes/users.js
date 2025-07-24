@@ -73,29 +73,92 @@ router.get('/me', auth, (req, res) => {
   res.json({ id: req.user.id, email: req.user.email, role: req.user.role });
 });
 
+// Fetch the full profile for the logged in user
+router.get('/me/profile', auth, async (req, res) => {
+  const db = await dbPromise;
+  if (req.user.role === 'artist') {
+    const profile = await db.get('SELECT * FROM artist_profiles WHERE user_id = ?', req.user.id);
+    return res.json(profile || {});
+  }
+  if (req.user.role === 'club') {
+    const profile = await db.get('SELECT * FROM club_profiles WHERE user_id = ?', req.user.id);
+    return res.json(profile || {});
+  }
+  res.json({});
+});
+
 // Update the profile for the logged-in user. Artists and clubs store different fields
 router.put('/me/profile', auth, async (req, res) => {
   const db = await dbPromise;
   const updates = req.body;
   if (req.user.role === 'artist') {
     await db.run(
-      `UPDATE artist_profiles SET bio = COALESCE(?, bio), genres = COALESCE(?, genres), social_links = COALESCE(?, social_links) WHERE user_id = ?`,
+      `UPDATE artist_profiles SET 
+        given_name = COALESCE(?, given_name),
+        father_name = COALESCE(?, father_name),
+        family_name = COALESCE(?, family_name),
+        stage_name = COALESCE(?, stage_name),
+        uses_real_name = COALESCE(?, uses_real_name),
+        country = COALESCE(?, country),
+        city = COALESCE(?, city),
+        birth_date = COALESCE(?, birth_date),
+        bio = COALESCE(?, bio),
+        genres = COALESCE(?, genres),
+        photo_path = COALESCE(?, photo_path),
+        social_links = COALESCE(?, social_links)
+      WHERE user_id = ?`,
+      updates.given_name,
+      updates.father_name,
+      updates.family_name,
+      updates.stage_name,
+      updates.uses_real_name,
+      updates.country,
+      updates.city,
+      updates.birth_date,
       updates.bio,
       updates.genres,
+      updates.photo_path,
       updates.social_links,
       req.user.id
     );
   }
   if (req.user.role === 'club') {
     await db.run(
-      `UPDATE club_profiles SET location = COALESCE(?, location), capacity = COALESCE(?, capacity), about = COALESCE(?, about) WHERE user_id = ?`,
-      updates.location,
+      `UPDATE club_profiles SET 
+        name = COALESCE(?, name),
+        country = COALESCE(?, country),
+        city = COALESCE(?, city),
+        address = COALESCE(?, address),
+        capacity = COALESCE(?, capacity),
+        genres = COALESCE(?, genres),
+        hours = COALESCE(?, hours),
+        about = COALESCE(?, about)
+      WHERE user_id = ?`,
+      updates.name,
+      updates.country,
+      updates.city,
+      updates.address,
       updates.capacity,
+      updates.genres,
+      updates.hours,
       updates.about,
       req.user.id
     );
   }
   res.json({ success: true });
+});
+
+// Public lists of artists and clubs
+router.get('/artists', async (_req, res) => {
+  const db = await dbPromise;
+  const artists = await db.all('SELECT user_id, stage_name, country, city FROM artist_profiles');
+  res.json(artists);
+});
+
+router.get('/clubs', async (_req, res) => {
+  const db = await dbPromise;
+  const clubs = await db.all('SELECT user_id, name, country, city FROM club_profiles');
+  res.json(clubs);
 });
 
 export default router;
