@@ -1,44 +1,36 @@
 # RITUAL Backend
 
-**Version 0.6.0**
+**Version 1.0.0**
 
 This repository contains the backend API for the RITUAL platform. The project follows the backend-first strategy defined in `AGENTS.json`.
 
 ## Setup
 
-1. Create a virtual environment and install dependencies:
+1. Install Node dependencies:
 
 ```bash
-python -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
+npm install
 ```
 
 2. Run tests:
 
 ```bash
-pytest -q
+npm test
 ```
 
 3. Start the development server:
 
 ```bash
-uvicorn app.main:app --reload
+node src/server.js
 ```
 
 ## Versioning
 
-This project follows [Semantic Versioning](https://semver.org). Use `python tools/bump_version.py --patch` to bump the patch version. Use `--minor` or `--major` for larger increments. The Python code remains on the 0.x line until the planned JavaScript refactor lands as **1.0.0**.
+This project follows [Semantic Versioning](https://semver.org). Use `npm version patch` to bump the patch version. Use `minor` or `major` for larger increments.
 
 ## Web-Based Test Runner
 
-A simple test runner is available under `test/index.html`. Serve the repository with Python's built-in web server and open the page in your browser:
-
-```bash
-python -m http.server
-```
-
-Then visit `http://localhost:8000/test/index.html` and click **Run Tests** to execute the suite using Pyodide.
+Tests can also be executed in the browser by opening `test/index.html`, which simply instructs you to run `npm test` from the command line.
 
 ## Documentation
 
@@ -68,4 +60,4 @@ The project has progressed through the initial phases defined in `AGENTS.json`:
 - **Phase 2** – Event management and booking endpoints with tests.
 - **Phase 3** – Preparing for deployment on Render or Railway.
 
-Version 0.6.0 marks the addition of a browser-based test runner and the adoption of Semantic Versioning for all future releases. The current Python implementation will remain in the 0.x series until a planned JavaScript refactor reaches **1.0.0**.
+Version 1.0.0 begins the Node.js implementation and replaces the former Python codebase.
