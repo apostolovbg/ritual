@@ -9,10 +9,7 @@ This document outlines the remaining phases required to make the RITUAL project 
 - **Hosting Setup**: Choose a service such as Render or Railway and configure deployment. Store configuration details in the repository documentation.
 
 ## Phase 4 – Basic Frontend
-- **Framework Choice**: Start with a simple React app (Create React App or Next.js) to consume the existing API. The frontend should support registration, login, profile editing, event creation and browsing, and booking requests.
-- **State Management**: Use context or a lightweight library (e.g., Zustand) for authentication state. Persist the JWT token securely in local storage.
-- **Styling**: Apply a minimal UI framework such as Tailwind CSS for rapid development.
-- **Testing**: Write unit tests with Jest and React Testing Library to cover form handling and API interactions.
+- Completed: basic React app with context-based auth, Tailwind styling, and Jest tests covering login interactions.
 
 ## Phase 5 – Feature Expansion
 - **Payment and Booking Enhancements**: Integrate a payment provider (e.g., Stripe) for event tickets and artist payouts. Extend the booking flow with confirmation and cancellation endpoints.
