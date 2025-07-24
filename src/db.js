@@ -17,15 +17,29 @@ export async function initDb() {
     );
     CREATE TABLE IF NOT EXISTS artist_profiles (
       user_id INTEGER PRIMARY KEY,
+      given_name TEXT DEFAULT '',
+      father_name TEXT DEFAULT '',
+      family_name TEXT DEFAULT '',
+      stage_name TEXT DEFAULT '',
+      uses_real_name INTEGER DEFAULT 0,
+      country TEXT DEFAULT '',
+      city TEXT DEFAULT '',
+      birth_date TEXT DEFAULT '',
       bio TEXT DEFAULT '',
       genres TEXT DEFAULT '',
+      photo_path TEXT DEFAULT '',
       social_links TEXT DEFAULT '',
       FOREIGN KEY(user_id) REFERENCES users(id)
     );
     CREATE TABLE IF NOT EXISTS club_profiles (
       user_id INTEGER PRIMARY KEY,
-      location TEXT DEFAULT '',
+      name TEXT DEFAULT '',
+      country TEXT DEFAULT '',
+      city TEXT DEFAULT '',
+      address TEXT DEFAULT '',
       capacity INTEGER DEFAULT 0,
+      genres TEXT DEFAULT '',
+      hours TEXT DEFAULT '',
       about TEXT DEFAULT '',
       FOREIGN KEY(user_id) REFERENCES users(id)
     );
@@ -34,6 +48,8 @@ export async function initDb() {
       club_id INTEGER NOT NULL,
       title TEXT NOT NULL,
       date TEXT DEFAULT CURRENT_TIMESTAMP,
+      start_time TEXT DEFAULT '',
+      end_time TEXT DEFAULT '',
       location TEXT DEFAULT '',
       genres TEXT DEFAULT '',
       FOREIGN KEY(club_id) REFERENCES users(id)
