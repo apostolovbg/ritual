@@ -10,13 +10,6 @@ function updateNav() {
   document.getElementById('nav-create-event').style.display = token && userRole === 'club' ? 'inline' : 'none';
 }
 
-function updateNav() {
-  document.getElementById('nav-login').style.display = token ? 'none' : 'inline';
-  document.getElementById('nav-logout').style.display = token ? 'inline' : 'none';
-  document.getElementById('nav-profile').style.display = token ? 'inline' : 'none';
-  document.getElementById('nav-create-event').style.display = token ? 'inline' : 'none';
-}
-
 function show(name) {
 const pages = {
     register: renderRegister,
@@ -119,7 +112,8 @@ function renderProfile() {
     if (user.role === 'artist') {
       content.innerHTML = `
         <h2>Artist Profile</h2>
-        Email: ${user.email}<br>
+        ID: ${user.id}<br>
+        <input id="email" placeholder="Email" value="${user.email}"><br>
         <input id="given_name" placeholder="Given name" value="${profile.given_name || ''}"><br>
         <input id="father_name" placeholder="Father name" value="${profile.father_name || ''}"><br>
         <input id="family_name" placeholder="Family name" value="${profile.family_name || ''}"><br>
@@ -150,6 +144,7 @@ function renderProfile() {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token },
           body: JSON.stringify({
+            email: document.getElementById('email').value,
             given_name: document.getElementById('given_name').value,
             father_name: document.getElementById('father_name').value,
             family_name: document.getElementById('family_name').value,
@@ -161,12 +156,13 @@ function renderProfile() {
             genres: document.getElementById('genres').value,
             bio: document.getElementById('bio').value
           })
-        });
+        }).then(renderProfile);
       };
     } else {
       content.innerHTML = `
         <h2>Venue Profile</h2>
-        Email: ${user.email}<br>
+        ID: ${user.id}<br>
+        <input id="email" placeholder="Email" value="${user.email}"><br>
         <input id="name" placeholder="Name" value="${profile.name || ''}"><br>
         <input id="country" placeholder="Country" value="${profile.country || ''}"><br>
         <input id="city" placeholder="City" value="${profile.city || ''}"><br>
@@ -188,6 +184,7 @@ function renderProfile() {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token },
           body: JSON.stringify({
+            email: document.getElementById('email').value,
             name: document.getElementById('name').value,
             country: document.getElementById('country').value,
             city: document.getElementById('city').value,
@@ -197,7 +194,7 @@ function renderProfile() {
             hours: document.getElementById('hours').value,
             about: document.getElementById('about').value
           })
-        });
+        }).then(renderProfile);
       };
 
       fetch(`/clubs/${userId}/events`).then(r => r.json()).then(events => {
@@ -289,7 +286,7 @@ function renderCreateEvent() {
 
 function renderArtists() {
   fetch('/artists').then(r => r.json()).then(list => {
-    content.innerHTML = '<h2>Artists</h2>' + list.map(a => `<div><a href="#" data-id="${a.user_id}" class="prof">${a.stage_name}</a></div>`).join('');
+    content.innerHTML = '<h2>Artists</h2>' + list.map(a => `<div>${a.user_id}: <a href="#" data-id="${a.user_id}" class="prof">${a.stage_name}</a></div>`).join('');
     document.querySelectorAll('.prof').forEach(a => {
       a.onclick = e => { e.preventDefault(); renderPublicProfile(a.dataset.id); };
     });
@@ -298,7 +295,7 @@ function renderArtists() {
 
 function renderClubs() {
   fetch('/clubs').then(r => r.json()).then(list => {
-    content.innerHTML = '<h2>Venues</h2>' + list.map(c => `<div><a href="#" data-id="${c.user_id}" class="prof">${c.name}</a></div>`).join('');
+    content.innerHTML = '<h2>Venues</h2>' + list.map(c => `<div>${c.user_id}: <a href="#" data-id="${c.user_id}" class="prof">${c.name}</a></div>`).join('');
     document.querySelectorAll('.prof').forEach(a => {
       a.onclick = e => { e.preventDefault(); renderPublicProfile(a.dataset.id); };
     });
@@ -307,7 +304,7 @@ function renderClubs() {
 
 function renderPublicProfile(id) {
   fetch(`/profiles/${id}`).then(r => r.json()).then(p => {
-    let html = '<h2>Profile</h2>';
+    let html = `<h2>Profile ${id}</h2>`;
     if (p.role === 'artist') {
       html += `<div>Stage name: ${p.stage_name}</div>`;
       html += `<div>Country: ${p.country}</div>`;
@@ -325,18 +322,6 @@ function renderPublicProfile(id) {
       return;
     }
     content.innerHTML = html;
-  });
-}
-
-function renderArtists() {
-  fetch('/artists').then(r => r.json()).then(list => {
-    content.innerHTML = '<h2>Artists</h2>' + list.map(a => `<div>${a.stage_name}</div>`).join('');
-  });
-}
-
-function renderClubs() {
-  fetch('/clubs').then(r => r.json()).then(list => {
-    content.innerHTML = '<h2>Venues</h2>' + list.map(c => `<div>${c.name}</div>`).join('');
   });
 }
 

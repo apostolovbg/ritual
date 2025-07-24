@@ -1,6 +1,6 @@
 # RITUAL Web App
 
-**Version 1.5.0**
+**Version 1.5.1**
 
 This repository hosts the full stack implementation of the RITUAL web application. Development rules are defined in `AGENTS.md`, which outlines mandatory practices and versioning guidelines. Earlier planning files such as `pickup.json` and all Python sources have been removed; their history remains in the git log and `CHANGELOG.md`.
 
@@ -42,8 +42,8 @@ docker compose up --build
 
 Static pages for operational testing live in the `public` directory. Open `public/index.html` in a browser while the server is running to interact with the API.
 The page now supports logging in, editing artist or venue profiles with all major
-fields and creating or editing events for venues. Lists of artists and venues are
-publicly browseable and each links to a dedicated profile view.
+fields, including the account email, and creating or editing events for venues. Lists of artists and venues are
+publicly browseable, display each profile's ID and link to a dedicated profile view.
 
 The older React prototype remains in `frontend` for ongoing experiments. Install its dependencies and run its tests with:
 
@@ -69,7 +69,7 @@ The backend currently supports the following operations:
 - `POST /register` – create a user
 - `POST /login` – obtain a JWT token
 - `GET /me` – retrieve the current user
-- `PUT /me/profile` – update artist or club profile
+- `PUT /me/profile` – update artist or club profile (email can be changed too)
 - `GET /me/profile` – retrieve the current profile
 - `POST /events` – create an event (club only)
 - `PUT /events/{id}` – update an event (club only)

@@ -27,6 +27,15 @@ All notable changes to this project will be documented in this file.
 ### Changed
 - Navigation now adapts to the logged-in role.
 - Tests expanded for the new endpoints.
+
+## [1.5.1] - 2025-07-24
+### Fixed
+- Profile editing now updates the account email
+- Artist and venue lists display profile IDs
+- Logged-in users see their ID on the profile page
+### Changed
+- Frontend reloads profile data after saving
+
 ## [1.2.1] - 2025-07-27
 ### Fixed
 - Added missing testing library dependencies.

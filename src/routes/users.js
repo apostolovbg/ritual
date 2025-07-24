@@ -91,6 +91,11 @@ router.get('/me/profile', auth, async (req, res) => {
 router.put('/me/profile', auth, async (req, res) => {
   const db = await dbPromise;
   const updates = req.body;
+  // Allow changing the account email from the same form. Only update when
+  // a new email value is supplied so empty submissions won't clear it.
+  if (updates.email) {
+    await db.run('UPDATE users SET email = ? WHERE id = ?', updates.email, req.user.id);
+  }
   if (req.user.role === 'artist') {
     await db.run(
       `UPDATE artist_profiles SET 

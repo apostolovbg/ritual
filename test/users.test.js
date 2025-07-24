@@ -27,12 +27,16 @@ it('updates and retrieves profile', async () => {
   await request(app)
     .put('/me/profile')
     .set('Authorization', `Bearer ${token}`)
-    .send({ given_name: 'A', family_name: 'B', bio: 'Bio' });
+    .send({ email: 'new@example.com', given_name: 'A', family_name: 'B', bio: 'Bio' });
   const profile = await request(app)
     .get('/me/profile')
     .set('Authorization', `Bearer ${token}`);
   expect(profile.statusCode).toBe(200);
   expect(profile.body.given_name).toBe('A');
+  const me = await request(app)
+    .get('/me')
+    .set('Authorization', `Bearer ${token}`);
+  expect(me.body.email).toBe('new@example.com');
 });
 
 it('lists artists', async () => {
