@@ -3,13 +3,19 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { dbPromise } from '../app.js';
 
+// Router handling user registration, login and profile management
+
 const router = Router();
+// JWT secret used to sign authentication tokens. In production this should
+// come from an environment variable.
 const SECRET = process.env.JWT_SECRET || 'secret';
 
+// Helper function to create a short-lived JWT
 function signToken(id) {
   return jwt.sign({ sub: id }, SECRET, { expiresIn: '1h' });
 }
 
+// Create a new user account and associated empty profile
 router.post('/register', async (req, res) => {
   const db = await dbPromise;
   const { email, password, role } = req.body;
@@ -33,6 +39,7 @@ router.post('/register', async (req, res) => {
   }
 });
 
+// Authenticate a user and return a JWT
 router.post('/login', async (req, res) => {
   const db = await dbPromise;
   const { email, password } = req.body;
@@ -44,6 +51,7 @@ router.post('/login', async (req, res) => {
   res.json({ access_token: token });
 });
 
+// Middleware to verify the JWT and attach the user record
 async function auth(req, res, next) {
   const header = req.headers.authorization;
   if (!header) return res.sendStatus(401);
@@ -60,10 +68,12 @@ async function auth(req, res, next) {
   }
 }
 
+// Return information about the currently authenticated user
 router.get('/me', auth, (req, res) => {
   res.json({ id: req.user.id, email: req.user.email, role: req.user.role });
 });
 
+// Update the profile for the logged-in user. Artists and clubs store different fields
 router.put('/me/profile', auth, async (req, res) => {
   const db = await dbPromise;
   const updates = req.body;

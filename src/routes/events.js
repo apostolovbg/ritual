@@ -2,9 +2,13 @@ import { Router } from 'express';
 import { dbPromise } from '../app.js';
 import jwt from 'jsonwebtoken';
 
+// Router managing event creation and booking workflows
+
 const router = Router();
+// JWT secret should match the users route for authentication
 const SECRET = process.env.JWT_SECRET || 'secret';
 
+// Middleware verifying a user's JWT before allowing access to protected routes
 async function auth(req, res, next) {
   const header = req.headers.authorization;
   if (!header) return res.sendStatus(401);
@@ -21,6 +25,7 @@ async function auth(req, res, next) {
   }
 }
 
+// Club users create events that artists can request to join
 router.post('/events', auth, async (req, res) => {
   if (req.user.role !== 'club') return res.status(403).json({ error: 'Only clubs can create events' });
   const db = await dbPromise;
@@ -37,12 +42,14 @@ router.post('/events', auth, async (req, res) => {
   res.json(event);
 });
 
+// List all upcoming events
 router.get('/events', async (req, res) => {
   const db = await dbPromise;
   const events = await db.all('SELECT * FROM events');
   res.json(events);
 });
 
+// Retrieve a single event by ID
 router.get('/events/:id', async (req, res) => {
   const db = await dbPromise;
   const event = await db.get('SELECT * FROM events WHERE id = ?', req.params.id);
@@ -50,6 +57,7 @@ router.get('/events/:id', async (req, res) => {
   res.json(event);
 });
 
+// Artists request to perform at an event
 router.post('/bookings', auth, async (req, res) => {
   if (req.user.role !== 'artist') return res.status(403).json({ error: 'Only artists can request bookings' });
   const db = await dbPromise;
@@ -64,6 +72,7 @@ router.post('/bookings', auth, async (req, res) => {
   res.json(booking);
 });
 
+// View bookings for the authenticated user, filtering by role
 router.get('/my-bookings', auth, async (req, res) => {
   const db = await dbPromise;
   let bookings;
@@ -75,4 +84,5 @@ router.get('/my-bookings', auth, async (req, res) => {
   res.json(bookings);
 });
 
+// Export router to be mounted in the main app
 export default router;

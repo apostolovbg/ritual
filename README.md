@@ -1,8 +1,9 @@
 # RITUAL Backend
 
-**Version 1.0.0**
+**Version 1.1.0**
 
 This repository contains the backend API for the RITUAL platform. The project follows the backend-first strategy defined in `AGENTS.json`.
+Previous planning files `pickup.json` and `requirements.txt` have been removed as they are no longer relevant to the Node.js implementation.
 
 ## Setup
 
@@ -18,10 +19,18 @@ npm install
 npm test
 ```
 
-3. Start the development server:
+3. Copy `.env.example` to `.env` and set the required secrets.
+
+4. Start the development server:
 
 ```bash
 node src/server.js
+```
+
+Alternatively you can run the service with Docker:
+
+```bash
+docker compose up --build
 ```
 
 ## Versioning
@@ -61,4 +70,4 @@ The project has progressed through the initial phases defined in `AGENTS.json`:
 - **Phase 2** – Event management and booking endpoints with tests.
 - **Phase 3** – Preparing for deployment on Render or Railway.
 
-Version 1.0.0 begins the Node.js implementation and replaces the former Python codebase.
+Version 1.1.0 introduces containerization and CI support while continuing the Node.js implementation.
