@@ -10,6 +10,13 @@ function updateNav() {
   document.getElementById('nav-create-event').style.display = token && userRole === 'club' ? 'inline' : 'none';
 }
 
+function updateNav() {
+  document.getElementById('nav-login').style.display = token ? 'none' : 'inline';
+  document.getElementById('nav-logout').style.display = token ? 'inline' : 'none';
+  document.getElementById('nav-profile').style.display = token ? 'inline' : 'none';
+  document.getElementById('nav-create-event').style.display = token ? 'inline' : 'none';
+}
+
 function show(name) {
 const pages = {
     register: renderRegister,
@@ -318,6 +325,18 @@ function renderPublicProfile(id) {
       return;
     }
     content.innerHTML = html;
+  });
+}
+
+function renderArtists() {
+  fetch('/artists').then(r => r.json()).then(list => {
+    content.innerHTML = '<h2>Artists</h2>' + list.map(a => `<div>${a.stage_name}</div>`).join('');
+  });
+}
+
+function renderClubs() {
+  fetch('/clubs').then(r => r.json()).then(list => {
+    content.innerHTML = '<h2>Venues</h2>' + list.map(c => `<div>${c.name}</div>`).join('');
   });
 }
 

@@ -27,7 +27,6 @@ All notable changes to this project will be documented in this file.
 ### Changed
 - Navigation now adapts to the logged-in role.
 - Tests expanded for the new endpoints.
-
 ## [1.2.1] - 2025-07-27
 ### Fixed
 - Added missing testing library dependencies.
