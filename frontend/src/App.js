@@ -11,6 +11,9 @@ import Register from './pages/Register.js';
 import Profile from './pages/Profile.js';
 import Events from './pages/Events.js';
 import CreateEvent from './pages/CreateEvent.js';
+import Artists from './pages/Artists.js';
+import Clubs from './pages/Clubs.js';
+import PublicProfile from './pages/PublicProfile.js';
 
 function App() {
   return (
@@ -20,6 +23,8 @@ function App() {
           <Link to="/register">Register</Link>
           <Link to="/login">Login</Link>
           <Link to="/profile">Profile</Link>
+          <Link to="/artists">Artists</Link>
+          <Link to="/venues">Venues</Link>
           <Link to="/events">Events</Link>
           <Link to="/create-event">Create Event</Link>
         </nav>
@@ -27,6 +32,9 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/artists" element={<Artists />} />
+          <Route path="/venues" element={<Clubs />} />
+          <Route path="/profiles/:id" element={<PublicProfile />} />
           <Route path="/events" element={<Events />} />
           <Route path="/create-event" element={<CreateEvent />} />
           <Route path="/" element={<Events />} />

@@ -36,6 +36,13 @@ All notable changes to this project will be documented in this file.
 ### Changed
 - Frontend reloads profile data after saving
 
+## [1.5.2] - 2025-07-24
+### Added
+- React frontend now supports full profile forms for artists and venues.
+- Public lists of artists and venues with links to profile views.
+### Changed
+- README updated for persistent profile features.
+
 ## [1.2.1] - 2025-07-27
 ### Fixed
 - Added missing testing library dependencies.
