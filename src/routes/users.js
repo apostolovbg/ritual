@@ -161,4 +161,20 @@ router.get('/clubs', async (_req, res) => {
   res.json(clubs);
 });
 
+// Retrieve a public profile by user id. The endpoint detects whether the
+// requested user is an artist or a club and returns the corresponding profile
+// data. This is used for the public lists in the testing frontend when a user
+// clicks on a name.
+router.get('/profiles/:id', async (req, res) => {
+  const db = await dbPromise;
+  const user = await db.get('SELECT role FROM users WHERE id = ?', req.params.id);
+  if (!user) return res.sendStatus(404);
+  if (user.role === 'artist') {
+    const profile = await db.get('SELECT * FROM artist_profiles WHERE user_id = ?', req.params.id);
+    return res.json({ role: 'artist', ...profile });
+  }
+  const profile = await db.get('SELECT * FROM club_profiles WHERE user_id = ?', req.params.id);
+  res.json({ role: 'club', ...profile });
+});
+
 export default router;

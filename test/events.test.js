@@ -13,10 +13,10 @@ beforeAll(async () => {
 });
 
 test('event and booking flow', async () => {
-  await request(app).post('/register').send({ email: 'club@example.com', password: 'pass', role: 'club' });
+  const clubReg = await request(app).post('/register').send({ email: 'club@example.com', password: 'pass', role: 'club' });
+  clubId = clubReg.body.id;
   const respClubLogin = await request(app).post('/login').send({ email: 'club@example.com', password: 'pass' });
   clubToken = respClubLogin.body.access_token;
-  clubId = 1;
 
   await request(app).post('/register').send({ email: 'artist@example.com', password: 'pass', role: 'artist' });
   const respArtistLogin = await request(app).post('/login').send({ email: 'artist@example.com', password: 'pass' });
@@ -25,7 +25,7 @@ test('event and booking flow', async () => {
   const eventResp = await request(app)
     .post('/events')
     .set('Authorization', `Bearer ${clubToken}`)
-    .send({ title: 'Gig' });
+    .send({ title: 'Gig', start_time: '20:00', end_time: '23:00' });
   expect(eventResp.statusCode).toBe(200);
   eventId = eventResp.body.id;
 
@@ -47,4 +47,8 @@ test('event and booking flow', async () => {
     .send({ title: 'Updated' });
   expect(edit.statusCode).toBe(200);
   expect(edit.body.title).toBe('Updated');
+
+  const byClub = await request(app).get(`/clubs/${clubId}/events`);
+  expect(byClub.statusCode).toBe(200);
+  expect(byClub.body.length).toBe(1);
 });

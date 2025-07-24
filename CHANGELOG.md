@@ -18,6 +18,15 @@ All notable changes to this project will be documented in this file.
 - Database schema expanded for detailed profiles and events.
 - Documentation updated for new endpoints and version.
 
+## [1.5.0] - 2025-07-24
+### Added
+- Public profile endpoint and venue event listing API.
+- Extensive artist and venue profile forms in the static frontend.
+- Event management UI with editing capabilities for venues.
+- Clickable artist and venue lists with profile display.
+### Changed
+- Navigation now adapts to the logged-in role.
+- Tests expanded for the new endpoints.
 ## [1.2.1] - 2025-07-27
 ### Fixed
 - Added missing testing library dependencies.

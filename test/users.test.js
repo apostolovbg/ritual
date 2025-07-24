@@ -9,10 +9,12 @@ beforeAll(async () => {
 });
 
 let token;
+let userId;
 
 it('registers and logs in user', async () => {
   const res = await request(app).post('/register').send({ email: 'user@example.com', password: 'pass', role: 'artist' });
   expect(res.statusCode).toBe(200);
+  userId = res.body.id;
   const login = await request(app).post('/login').send({ email: 'user@example.com', password: 'pass' });
   expect(login.statusCode).toBe(200);
   token = login.body.access_token;
@@ -37,4 +39,10 @@ it('lists artists', async () => {
   const res = await request(app).get('/artists');
   expect(res.statusCode).toBe(200);
   expect(res.body.length).toBeGreaterThan(0);
+});
+
+it('fetches public profile', async () => {
+  const res = await request(app).get(`/profiles/${userId}`);
+  expect(res.statusCode).toBe(200);
+  expect(res.body.given_name).toBe('A');
 });

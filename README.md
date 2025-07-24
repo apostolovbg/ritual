@@ -1,6 +1,6 @@
 # RITUAL Web App
 
-**Version 1.4.0**
+**Version 1.5.0**
 
 This repository hosts the full stack implementation of the RITUAL web application. Development rules are defined in `AGENTS.md`, which outlines mandatory practices and versioning guidelines. Earlier planning files such as `pickup.json` and all Python sources have been removed; their history remains in the git log and `CHANGELOG.md`.
 
@@ -41,6 +41,9 @@ docker compose up --build
 ## Frontend
 
 Static pages for operational testing live in the `public` directory. Open `public/index.html` in a browser while the server is running to interact with the API.
+The page now supports logging in, editing artist or venue profiles with all major
+fields and creating or editing events for venues. Lists of artists and venues are
+publicly browseable and each links to a dedicated profile view.
 
 The older React prototype remains in `frontend` for ongoing experiments. Install its dependencies and run its tests with:
 
@@ -76,6 +79,8 @@ The backend currently supports the following operations:
 - `GET /my-bookings` – view bookings for the current user
 - `GET /artists` – list artist profiles
 - `GET /clubs` – list venue profiles
+- `GET /profiles/{id}` – get a single public profile
+- `GET /clubs/{id}/events` – list events for a club
 
 ## Development History
 
