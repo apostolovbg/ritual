@@ -1,6 +1,6 @@
 # Development Plan
 
-This document outlines the remaining phases required to make the RITUAL project fully functional and ready for deployment. The plan expands on the guidelines in `AGENTS.md` and information in `pickup.json`.
+This document outlines the remaining phases required to make the RITUAL project fully functional and ready for deployment. The plan expands on the guidelines in `AGENTS.md`. The previously referenced `pickup.json` file has been removed.
 
 ## Phase 3 – Deployment Preparation
 - **Containerization**: Create a Dockerfile for the Node.js backend and define a `docker-compose.yml` for local development. Ensure SQLite data is persisted via a volume.
@@ -20,11 +20,11 @@ This document outlines the remaining phases required to make the RITUAL project 
 - **User Notifications**: Implement email notifications for bookings and event updates via a provider such as SendGrid.
 
 ## Phase 6 – Advanced Functionality
-- **AI Modules**: Explore the career advisor and talent curation features described in `pickup.json`. Prototype simple recommendation endpoints and gradually expand to more sophisticated ML models.
+- **AI Modules**: Explore the career advisor and talent curation features that were originally outlined in `pickup.json`. Prototype simple recommendation endpoints and gradually expand to more sophisticated ML models.
 - **Blockchain Integration**: Experiment with token-based rewards and governance. Begin with a testnet implementation and document smart contract interactions.
 
 ## Phase 7 – Production Hardening
-- **Security Audits**: Perform penetration testing, add 2FA support, and review compliance requirements (GDPR, CCPA, SOC 2 Type II, ISO 27001) as referenced in `pickup.json`.
+- **Security Audits**: Perform penetration testing, add 2FA support, and review compliance requirements (GDPR, CCPA, SOC 2 Type II, ISO 27001) originally documented in `pickup.json`.
 - **Scalability Review**: Plan migration from SQLite to PostgreSQL for production. Evaluate container orchestration options if the service grows.
 - **Documentation**: Ensure all API endpoints and deployment steps are fully documented. Maintain examples for local and hosted environments.
 

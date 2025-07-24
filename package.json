@@ -1,6 +1,6 @@
 {
   "name": "ritual",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "RITUAL backend (Node.js version)",
   "main": "index.js",
   "directories": {
@@ -15,6 +15,7 @@
   "type": "module",
   "dependencies": {
     "bcryptjs": "^3.0.2",
+    "dotenv": "^16.3.1",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
     "sqlite": "^5.1.1",

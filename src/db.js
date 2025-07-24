@@ -1,7 +1,11 @@
 import sqlite3 from 'sqlite3';
 import { open } from 'sqlite';
 
+// Initialize and configure the SQLite database. All tables are created on startup
+// so the app can run without manual migrations.
+
 export async function initDb() {
+  // Open a connection to the SQLite file. The driver provides a Promise-based API
   const db = await open({ filename: 'database.sqlite', driver: sqlite3.Database });
   await db.exec(`
     CREATE TABLE IF NOT EXISTS users (
@@ -45,5 +49,6 @@ export async function initDb() {
       FOREIGN KEY(event_id) REFERENCES events(id)
     );
   `);
+  // Return the database instance so routers can perform queries
   return db;
 }

@@ -3,7 +3,7 @@
 This repository follows **AGENTS.json** as the canonical specification for the RITUAL backend. Key points:
 
 - Treat `AGENTS.json` as read-only authoritative instructions.
-- `pickup.json` remains for historical context only. Always follow `AGENTS.json` for current requirements.
+- The historical file `pickup.json` has been removed. Always follow `AGENTS.json` for current requirements.
 - Use **Express.js** with **SQLite** for local deployments. Auth via OAuth2 style JWT tokens.
 - Organize code by feature modules (e.g., `users`).
 - Provide automated tests with `jest` for all endpoints.
@@ -25,7 +25,7 @@ Version 1.0.0 completes the migration to a JavaScript stack using Express.js. Th
 
 ## Next Steps (Phase 3)
 
-Prepare for deployment on a hosting platform such as Render or Railway. Add Docker configuration and CI workflow updates. Ensure environment variables are managed securely. Continue updating documentation and tests with every change and avoid merge conflict markers like `<<<<<<<` in any file.
+Prepare for deployment on a hosting platform such as Render or Railway. Docker configuration and a CI workflow are now included. Environment variables must be managed securely using a `.env` file that is never committed. Continue updating documentation and tests with every change and avoid merge conflict markers like `<<<<<<<` in any file.
 
 ## Semantic Versioning
 

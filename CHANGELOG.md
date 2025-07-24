@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.0] - 2025-07-25
+### Added
+- Dockerfile and docker-compose for containerized development.
+- GitHub Actions workflow for CI.
+- `.env.example` and environment variable support via `dotenv`.
+### Removed
+- Deprecated files `pickup.json` and `requirements.txt`.
+### Changed
+- Updated documentation and added code comments for clarity.
+
 ## [1.0.0] - 2025-07-24
 ### Added
 - Node.js implementation replacing the Python FastAPI code.
