@@ -1,13 +1,22 @@
 const content = document.getElementById('content');
 let token = localStorage.getItem('token') || '';
 
+function updateNav() {
+  document.getElementById('nav-login').style.display = token ? 'none' : 'inline';
+  document.getElementById('nav-logout').style.display = token ? 'inline' : 'none';
+  document.getElementById('nav-profile').style.display = token ? 'inline' : 'none';
+  document.getElementById('nav-create-event').style.display = token ? 'inline' : 'none';
+}
+
 function show(name) {
-  const pages = {
+const pages = {
     register: renderRegister,
     login: renderLogin,
     profile: renderProfile,
     events: renderEvents,
-    create: renderCreateEvent
+    create: renderCreateEvent,
+    artists: renderArtists,
+    clubs: renderClubs
   };
   pages[name]();
 }
@@ -47,6 +56,7 @@ async function login(email, password) {
     const data = await res.json();
     token = data.access_token;
     localStorage.setItem('token', token);
+    updateNav();
     show('profile');
   } else {
     alert('Login failed');
@@ -68,25 +78,37 @@ function renderLogin() {
   };
 }
 
+function logout() {
+  token = '';
+  localStorage.removeItem('token');
+  updateNav();
+  show('login');
+}
+
 function renderProfile() {
   if (!token) { content.textContent = 'Please log in'; return; }
-  fetch('/me', {headers: {Authorization: 'Bearer ' + token}})
-    .then(res => res.json())
-    .then(data => {
-      content.innerHTML = `
-        <h2>Profile</h2>
-        <pre>${JSON.stringify(data, null, 2)}</pre>
-        <textarea id="bio" placeholder="Bio"></textarea><br>
-        <button id="save">Save</button>
-      `;
-      document.getElementById('save').onclick = () => {
-        fetch('/me/profile', {
-          method: 'PUT',
-          headers: {'Content-Type': 'application/json', Authorization: 'Bearer ' + token},
-          body: JSON.stringify({bio: document.getElementById('bio').value})
-        });
-      };
-    });
+  Promise.all([
+    fetch('/me', { headers: { Authorization: 'Bearer ' + token } }).then(r => r.json()),
+    fetch('/me/profile', { headers: { Authorization: 'Bearer ' + token } }).then(r => r.json())
+  ]).then(([user, profile]) => {
+    content.innerHTML = `
+      <h2>Profile</h2>
+      <pre>${JSON.stringify(user, null, 2)}</pre>
+      <input id="given_name" placeholder="Given name" value="${profile.given_name || ''}"><br>
+      <textarea id="bio" placeholder="Bio">${profile.bio || ''}</textarea><br>
+      <button id="save">Save</button>
+    `;
+    document.getElementById('save').onclick = () => {
+      fetch('/me/profile', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token },
+        body: JSON.stringify({
+          given_name: document.getElementById('given_name').value,
+          bio: document.getElementById('bio').value
+        })
+      });
+    };
+  });
 }
 
 function renderEvents() {
@@ -115,6 +137,9 @@ function renderCreateEvent() {
     <h2>Create Event</h2>
     <form id="eventForm">
       <input name="title" placeholder="Title"><br>
+      <input name="date" placeholder="Date"><br>
+      <input name="start_time" placeholder="Start time"><br>
+      <input name="end_time" placeholder="End time"><br>
       <button type="submit">Create</button>
     </form>`;
   document.getElementById('eventForm').onsubmit = e => {
@@ -122,16 +147,37 @@ function renderCreateEvent() {
     fetch('/events', {
       method: 'POST',
       headers: {'Content-Type': 'application/json', Authorization: 'Bearer ' + token},
-      body: JSON.stringify({title: e.target.title.value})
+      body: JSON.stringify({
+        title: e.target.title.value,
+        date: e.target.date.value,
+        start_time: e.target.start_time.value,
+        end_time: e.target.end_time.value
+      })
     });
   };
+}
+
+function renderArtists() {
+  fetch('/artists').then(r => r.json()).then(list => {
+    content.innerHTML = '<h2>Artists</h2>' + list.map(a => `<div>${a.stage_name}</div>`).join('');
+  });
+}
+
+function renderClubs() {
+  fetch('/clubs').then(r => r.json()).then(list => {
+    content.innerHTML = '<h2>Venues</h2>' + list.map(c => `<div>${c.name}</div>`).join('');
+  });
 }
 
 // navigation buttons
 document.getElementById('nav-register').onclick = () => show('register');
 document.getElementById('nav-login').onclick = () => show('login');
+document.getElementById('nav-logout').onclick = () => logout();
 document.getElementById('nav-profile').onclick = () => show('profile');
+document.getElementById('nav-artists').onclick = () => show('artists');
+document.getElementById('nav-clubs').onclick = () => show('clubs');
 document.getElementById('nav-events').onclick = () => show('events');
 document.getElementById('nav-create-event').onclick = () => show('create');
 
+updateNav();
 show('events');

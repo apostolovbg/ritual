@@ -40,4 +40,11 @@ test('event and booking flow', async () => {
     .set('Authorization', `Bearer ${artistToken}`);
   expect(myBookings.statusCode).toBe(200);
   expect(myBookings.body.length).toBe(1);
+
+  const edit = await request(app)
+    .put(`/events/${eventId}`)
+    .set('Authorization', `Bearer ${clubToken}`)
+    .send({ title: 'Updated' });
+  expect(edit.statusCode).toBe(200);
+  expect(edit.body.title).toBe('Updated');
 });
