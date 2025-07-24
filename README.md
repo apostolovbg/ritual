@@ -1,6 +1,6 @@
 # RITUAL Backend
 
-**Version 0.6a**
+**Version 0.6.0**
 
 This repository contains the backend API for the RITUAL platform. The project follows the backend-first strategy defined in `AGENTS.json`.
 
@@ -25,6 +25,10 @@ pytest -q
 ```bash
 uvicorn app.main:app --reload
 ```
+
+## Versioning
+
+This project follows [Semantic Versioning](https://semver.org). Use `python tools/bump_version.py --patch` to bump the patch version. Use `--minor` or `--major` for larger increments. The Python code remains on the 0.x line until the planned JavaScript refactor lands as **1.0.0**.
 
 ## Web-Based Test Runner
 
@@ -64,4 +68,4 @@ The project has progressed through the initial phases defined in `AGENTS.json`:
 - **Phase 2** – Event management and booking endpoints with tests.
 - **Phase 3** – Preparing for deployment on Render or Railway.
 
-Version 0.6a marks the addition of a browser-based test runner.
+Version 0.6.0 marks the addition of a browser-based test runner and the adoption of Semantic Versioning for all future releases. The current Python implementation will remain in the 0.x series until a planned JavaScript refactor reaches **1.0.0**.
