@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>RITUAL Test Runner</title>
+<script src="https://cdn.jsdelivr.net/pyodide/v0.23.4/full/pyodide.js"></script>
+<style>
+body { font-family: Arial, sans-serif; margin: 20px; }
+#output { white-space: pre-wrap; border: 1px solid #ccc; padding: 10px; background: #f5f5f5; }
+</style>
+</head>
+<body>
+<h1>RITUAL Test Runner (0.6a)</h1>
+<p>Click the button below to run the backend test suite in your browser using Pyodide.</p>
+<button id="run">Run Tests</button>
+<pre id="output"></pre>
+<script type="module">
+async function loadFiles(pyodide, files) {
+  for (const file of files) {
+    const response = await fetch('../' + file);
+    if (!response.ok) throw new Error('Failed to load ' + file);
+    const text = await response.text();
+    const parts = file.split('/');
+    for (let i = 0; i < parts.length - 1; i++) {
+      const dir = '/' + parts.slice(0, i + 1).join('/');
+      try { pyodide.FS.mkdir(dir); } catch (e) {}
+    }
+    pyodide.FS.writeFile('/' + file, text);
+  }
+}
+async function runTests() {
+  const out = document.getElementById('output');
+  out.textContent = 'Loading Python...';
+  const pyodide = await loadPyodide({indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.23.4/full/'});
+  await pyodide.loadPackage('micropip');
+  await pyodide.runPythonAsync(`import micropip, asyncio; await micropip.install(['pytest','fastapi','sqlalchemy','python-jose[cryptography]','passlib[bcrypt]','python-multipart','pydantic','httpx','email-validator','pydantic-settings'])`);
+  const files = [
+    'app/__init__.py','app/main.py',
+    'app/core/__init__.py','app/core/config.py','app/core/database.py','app/core/deps.py','app/core/security.py',
+    'app/users/__init__.py','app/users/routes.py','app/users/crud.py','app/users/models.py','app/users/schemas.py',
+    'app/events/__init__.py','app/events/routes.py','app/events/crud.py','app/events/models.py','app/events/schemas.py',
+    'app/tests/__init__.py','app/tests/test_users.py','app/tests/test_events.py'
+  ];
+  await loadFiles(pyodide, files);
+  const result = await pyodide.runPythonAsync(`
+import sys, io, pytest
+from contextlib import redirect_stdout
+buf = io.StringIO()
+with redirect_stdout(buf):
+    pytest.main(['-q','app/tests'])
+buf.getvalue()
+  `);
+  out.textContent = result;
+}
+document.getElementById('run').addEventListener('click', () => {
+  runTests().catch(err => { document.getElementById('output').textContent = 'Error: ' + err; });
+});
+</script>
+</body>
+</html>
