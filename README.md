@@ -36,6 +36,7 @@ Tests can also be executed in the browser by opening `test/index.html`, which si
 
 - `AGENTS.md` contains development guidelines.
 - `CHANGELOG.md` tracks project history.
+- `TODO.md` lists upcoming development phases.
 
 ## Endpoints
 

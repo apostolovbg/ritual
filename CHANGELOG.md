@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file.
 - SQLite storage and JWT-based authentication.
 - Jest test suite for API endpoints.
 - Updated documentation and versioning instructions.
+2025-07-24: Added TODO.md with roadmap for upcoming development (codex)
 
 ## [0.6a] - 2025-06-14
 ### Added
