@@ -9,6 +9,25 @@ All notable changes to this project will be documented in this file.
 ### Changed
 - Bumped package version and updated README to reflect full web application scope.
 
+## [1.4.0] - 2025-07-24
+### Added
+- Profile retrieval endpoint and artist/club listing APIs.
+- Event editing endpoint with date and time fields.
+- Frontend navigation improvements with logout and public user lists.
+### Changed
+- Database schema expanded for detailed profiles and events.
+- Documentation updated for new endpoints and version.
+
+## [1.5.0] - 2025-07-24
+### Added
+- Public profile endpoint and venue event listing API.
+- Extensive artist and venue profile forms in the static frontend.
+- Event management UI with editing capabilities for venues.
+- Clickable artist and venue lists with profile display.
+### Changed
+- Navigation now adapts to the logged-in role.
+- Tests expanded for the new endpoints.
+
 ## [1.2.1] - 2025-07-27
 ### Fixed
 - Added missing testing library dependencies.
