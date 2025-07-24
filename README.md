@@ -1,8 +1,8 @@
-# RITUAL Backend
+# RITUAL Web App
 
-**Version 1.2.1**
+**Version 1.3.0**
 
-This repository hosts the Node.js implementation of the RITUAL API. Development rules are defined in `AGENTS.md`, which outlines mandatory practices and versioning guidelines. Earlier planning files such as `pickup.json` and all Python sources have been removed; their history remains in the git log and `CHANGELOG.md`.
+This repository hosts the full stack implementation of the RITUAL web application. Development rules are defined in `AGENTS.md`, which outlines mandatory practices and versioning guidelines. Earlier planning files such as `pickup.json` and all Python sources have been removed; their history remains in the git log and `CHANGELOG.md`.
 
 ## Setup
 
@@ -40,13 +40,14 @@ docker compose up --build
 
 ## Frontend
 
-The `frontend` directory contains a minimal React application used for manual testing during Phase&nbsp;4. Install its dependencies and run its tests with:
+Static pages for operational testing live in the `public` directory. Open `public/index.html` in a browser while the server is running to interact with the API.
+
+The older React prototype remains in `frontend` for ongoing experiments. Install its dependencies and run its tests with:
 
 ```bash
 cd frontend && npm install && npm test
 ```
 
-Open `frontend/index.html` in a browser to interact with the API.
 
 ## Web-Based Test Runner
 

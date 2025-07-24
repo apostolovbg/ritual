@@ -9,6 +9,8 @@ import events from './routes/events.js';
 const app = express();
 // Accept JSON bodies from API clients
 app.use(express.json());
+// Serve static frontend files from the public directory
+app.use(express.static('public'));
 
 export const dbPromise = initDb();
 // Mount feature-specific routers

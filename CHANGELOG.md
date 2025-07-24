@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.0] - 2025-07-24
+### Added
+- Static `public` directory with `index.html` and JavaScript for manual API testing.
+- Express now serves this directory to provide a basic zero-trust frontend scaffold.
+### Changed
+- Bumped package version and updated README to reflect full web application scope.
+
 ## [1.2.1] - 2025-07-27
 ### Fixed
 - Added missing testing library dependencies.
