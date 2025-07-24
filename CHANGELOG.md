@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.0] - 2025-07-26
+### Added
+- React frontend with basic forms for registration, login, profile editing, event creation and booking.
+- Frontend unit tests using React Testing Library.
+### Changed
+- Documentation updated for new frontend and version bump.
+
 ## [1.1.0] - 2025-07-25
 ### Added
 - Dockerfile and docker-compose for containerized development.

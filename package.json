@@ -1,6 +1,6 @@
 {
   "name": "ritual",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "RITUAL backend (Node.js version)",
   "main": "index.js",
   "directories": {
@@ -23,6 +23,11 @@
   },
   "devDependencies": {
     "jest": "^30.0.5",
-    "supertest": "^7.1.4"
+    "supertest": "^7.1.4",
+    "jest-environment-jsdom": "^30.0.5",
+    "babel-jest": "^30.0.5",
+    "@babel/preset-env": "^7.23.0",
+    "@babel/preset-react": "^7.23.3",
+    "identity-obj-proxy": "^3.0.0"
   }
 }
