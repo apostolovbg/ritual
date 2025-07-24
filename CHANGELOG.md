@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.2.2] - 2025-07-28
+### Changed
+- Removed outdated Python files and scripts.
+- Updated documentation to match current Node.js and React implementation.
+
+
 All notable changes to this project will be documented in this file.
 
 ## [1.2.1] - 2025-07-27

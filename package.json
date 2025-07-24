@@ -1,6 +1,6 @@
 {
   "name": "ritual",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "RITUAL backend (Node.js version)",
   "main": "index.js",
   "directories": {
