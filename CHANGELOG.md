@@ -6,6 +6,8 @@ All notable changes to this project will be documented in this file.
 ### Fixed
 - Added missing testing library dependencies.
 - Updated version number and documentation.
+### Changed
+- Removed legacy Python code and refreshed documentation.
 
 ## [1.2.0] - 2025-07-26
 ### Added

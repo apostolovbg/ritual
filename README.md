@@ -2,12 +2,11 @@
 
 **Version 1.2.1**
 
-This repository contains the backend API for the RITUAL platform. The project follows the backend-first strategy defined in `AGENTS.json`.
-Previous planning files `pickup.json` and `requirements.txt` have been removed as they are no longer relevant to the Node.js implementation.
+This repository hosts the Node.js implementation of the RITUAL API. Development rules are defined in `AGENTS.md`, which outlines mandatory practices and versioning guidelines. Earlier planning files such as `pickup.json` and all Python sources have been removed; their history remains in the git log and `CHANGELOG.md`.
 
 ## Setup
 
-1. Install Node dependencies:
+1. Install dependencies:
 
 ```bash
 npm install
@@ -19,7 +18,13 @@ npm install
 npm test
 ```
 
-3. Copy `.env.example` to `.env` and set the required secrets.
+3. Copy `.env.example` to `.env` and adjust the values:
+
+```bash
+cp .env.example .env
+```
+
+Set `JWT_SECRET` and optionally `PORT` in the `.env` file.
 
 4. Start the development server:
 
@@ -27,7 +32,7 @@ npm test
 node src/server.js
 ```
 
-Alternatively you can run the service with Docker:
+You can also build and run the service with Docker:
 
 ```bash
 docker compose up --build
@@ -35,50 +40,43 @@ docker compose up --build
 
 ## Frontend
 
-The `frontend` folder contains a minimal React application used during Phase 4.
-Install its dependencies and run the tests with:
+The `frontend` directory contains a minimal React application used for manual testing during Phase&nbsp;4. Install its dependencies and run its tests with:
 
 ```bash
 cd frontend && npm install && npm test
 ```
 
-Open `frontend/index.html` in the browser to interact with the UI. It communicates with the backend described above.
-
-## Versioning
-
-This project follows [Semantic Versioning](https://semver.org). Use `npm version patch` to bump the patch version. Use `minor` or `major` for larger increments.
+Open `frontend/index.html` in a browser to interact with the API.
 
 ## Web-Based Test Runner
 
-Tests can also be executed in the browser by opening `test/index.html`, which simply instructs you to run `npm test` from the command line.
+If you prefer a browser-based environment, open `test/index.html`. It simply instructs you to run `npm test` from the terminal but provides a friendly landing page.
 
 ## Documentation
 
-- `AGENTS.md` contains development guidelines.
-- `CHANGELOG.md` tracks project history.
-- `TODO.md` lists upcoming development phases.
+- `AGENTS.md` &ndash; project LAWS and development history
+- `CHANGELOG.md` &ndash; chronological list of releases
+- `TODO.md` &ndash; roadmap for upcoming phases
 
-## Endpoints
+## API Overview
 
-Phase 1 delivered user authentication. Phase 2 added event creation and booking requests. Main routes include:
+The backend currently supports the following operations:
 
-- `POST /register` — create a user
-- `POST /login` — obtain a JWT token
-- `GET /me` — fetch the current user
-- `PUT /me/profile` — update artist or club profile
-- `POST /events` — create an event (club only)
-- `GET /events` — list events
-- `GET /events/{id}` — get a single event
-- `POST /bookings` — request booking (artist only)
-- `GET /my-bookings` — view bookings for the current user
+- `POST /register` – create a user
+- `POST /login` – obtain a JWT token
+- `GET /me` – retrieve the current user
+- `PUT /me/profile` – update artist or club profile
+- `POST /events` – create an event (club only)
+- `GET /events` – list events
+- `GET /events/{id}` – get a single event
+- `POST /bookings` – request booking (artist only)
+- `GET /my-bookings` – view bookings for the current user
 
-## Development Roadmap
+## Development History
 
-The project has progressed through the initial phases defined in `AGENTS.json`:
+Version 1.0.0 marked the transition from the original Python backend to Node.js with Express. Version 1.1.0 added Docker support and a CI workflow. Version 1.2.0 introduced a React frontend, and version 1.2.1 updated testing dependencies.
 
-- **Phase 0** – Repository setup with documentation and tests.
-- **Phase 1** – User registration, login and profile management.
-- **Phase 2** – Event management and booking endpoints with tests.
-- **Phase 3** – Preparing for deployment on Render or Railway.
+## Roadmap
 
-Version 1.2.1 introduces a basic React frontend alongside the existing Node.js backend.
+The next milestones are outlined in `TODO.md` and include deployment preparation, payment integration, analytics, notifications, AI-based recommendations and final production hardening.
+
