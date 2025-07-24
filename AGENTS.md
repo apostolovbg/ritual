@@ -4,9 +4,9 @@ This repository follows **AGENTS.json** as the canonical specification for the R
 
 - Treat `AGENTS.json` as read-only authoritative instructions.
 - `pickup.json` remains for historical context only. Always follow `AGENTS.json` for current requirements.
-- Use **FastAPI** with **SQLAlchemy** and PostgreSQL. Auth via OAuth2 + JWT.
+- Use **Express.js** with **SQLite** for local deployments. Auth via OAuth2 style JWT tokens.
 - Organize code by feature modules (e.g., `users`).
-- Provide automated tests with `pytest` for all endpoints.
+- Provide automated tests with `jest` for all endpoints.
 - Update `README.md` and `CHANGELOG.md` with every meaningful change.
 - Document development history thoroughly.
 - Phase 1 focuses on user authentication and profile management.
@@ -21,7 +21,7 @@ This repository follows **AGENTS.json** as the canonical specification for the R
 
 Phase 0 established the repository and documentation structure. Phase 1 added user authentication with JWT and profile management. Phase 2 built event and booking functionality with accompanying tests. Each phase is recorded in `CHANGELOG.md`.
 
-Version 0.6.0 begins formal semantic version tracking for all future changes. The Python implementation will remain on the 0.x line until a refactor to a web server compatible language (planned JavaScript) reaches version **1.0.0**. That release will mark the official start of the new stack; this repository currently serves as its precursor.
+Version 1.0.0 completes the migration to a JavaScript stack using Express.js. The previous Python code remains in history but is no longer maintained.
 
 ## Next Steps (Phase 3)
 

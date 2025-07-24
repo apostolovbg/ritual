@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.0] - 2025-07-24
+### Added
+- Node.js implementation replacing the Python FastAPI code.
+- SQLite storage and JWT-based authentication.
+- Jest test suite for API endpoints.
+- Updated documentation and versioning instructions.
+
 ## [0.6a] - 2025-06-14
 ### Added
 - Browser-based test runner using Pyodide (`test/index.html`).
