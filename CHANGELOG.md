@@ -7,6 +7,8 @@ All notable changes to this project will be documented in this file.
 - Browser-based test runner using Pyodide (`test/index.html`).
 - Documentation updated to version 0.6a.
 
+2025-07-24: Adopted Semantic Versioning and updated docs for upcoming refactor (codex)
+
 ## [0.1.0] - 2025-06-14
 ### Added
 - Initial repository with `AGENTS.json` and placeholder README.
