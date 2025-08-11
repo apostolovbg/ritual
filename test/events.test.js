@@ -73,3 +73,40 @@ test('event and booking flow', async () => {
   expect(byClub.statusCode).toBe(200);
   expect(byClub.body.length).toBe(1);
 });
+
+// Verify that only clubs can create events
+test('rejects event creation without club credentials', async () => {
+  const res = await request(app)
+    .post('/events')
+    .set('Authorization', `Bearer ${artistToken}`)
+    .send({
+      title: 'Another',
+      date: '2025-12-31',
+      start_time: '21:00',
+      end_time: '23:00',
+      location: 'City',
+      genres: 'jazz'
+    });
+  expect(res.statusCode).toBe(403);
+  expect(res.body.error).toBe('Only clubs can create events');
+});
+
+// Event editing should also be restricted to club accounts
+test('rejects event editing without club credentials', async () => {
+  const res = await request(app)
+    .put(`/events/${eventId}`)
+    .set('Authorization', `Bearer ${artistToken}`)
+    .send({ title: 'Hacked' });
+  expect(res.statusCode).toBe(403);
+  expect(res.body.error).toBe('Only clubs can edit events');
+});
+
+// Booking requests must originate from artist accounts, not clubs
+test('rejects booking without artist credentials', async () => {
+  const res = await request(app)
+    .post('/bookings')
+    .set('Authorization', `Bearer ${clubToken}`)
+    .send({ club_id: clubId, event_id: eventId });
+  expect(res.statusCode).toBe(403);
+  expect(res.body.error).toBe('Only artists can request bookings');
+});

@@ -86,6 +86,9 @@ The backend currently supports the following operations:
 
 Registration and event creation endpoints validate input and return helpful
 HTTP 400 messages when required fields are missing or incorrectly formatted.
+Unauthorized or role-mismatched requests, such as duplicate registrations,
+bad login attempts, or booking with the wrong account type, return 400–403
+errors with descriptive messages.
 
 ## Development History
 
