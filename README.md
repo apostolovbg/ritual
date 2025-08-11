@@ -24,7 +24,7 @@ npm test
 cp .env.example .env
 ```
 
-Set `JWT_SECRET` and optionally `PORT` in the `.env` file.
+Set `JWT_SECRET` (required— the server will not start without it) and optionally `PORT` in the `.env` file.
 
 4. Start the development server:
 

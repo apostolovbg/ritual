@@ -1,12 +1,12 @@
 import { Router } from 'express';
 import { dbPromise } from '../app.js';
 import jwt from 'jsonwebtoken';
+import { jwtSecret } from '../config.js';
 
 // Router managing event creation and booking workflows
 
 const router = Router();
-// JWT secret should match the users route for authentication
-const SECRET = process.env.JWT_SECRET || 'secret';
+// JWT secret is imported from the shared config, guaranteeing it exists.
 
 // Middleware verifying a user's JWT before allowing access to protected routes
 async function auth(req, res, next) {
@@ -14,7 +14,8 @@ async function auth(req, res, next) {
   if (!header) return res.sendStatus(401);
   const token = header.split(' ')[1];
   try {
-    const decoded = jwt.verify(token, SECRET);
+    // Verify incoming tokens using the centrally configured secret.
+    const decoded = jwt.verify(token, jwtSecret);
     const db = await dbPromise;
     const user = await db.get('SELECT * FROM users WHERE id = ?', decoded.sub);
     if (!user) throw new Error('not found');
