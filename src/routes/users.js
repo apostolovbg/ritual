@@ -3,6 +3,7 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { dbPromise } from '../app.js';
 import { jwtSecret } from '../config.js';
+import auth from '../middleware/auth.js'; // Shared JWT validation middleware
 
 // Router handling user registration, login and profile management
 
@@ -51,23 +52,6 @@ router.post('/login', async (req, res) => {
   const token = signToken(user.id);
   res.json({ access_token: token });
 });
-
-// Middleware to verify the JWT and attach the user record
-async function auth(req, res, next) {
-  const header = req.headers.authorization;
-  if (!header) return res.sendStatus(401);
-  const token = header.split(' ')[1];
-  try {
-    const decoded = jwt.verify(token, jwtSecret);
-    const db = await dbPromise;
-    const user = await db.get('SELECT * FROM users WHERE id = ?', decoded.sub);
-    if (!user) throw new Error('not found');
-    req.user = user;
-    next();
-  } catch {
-    res.sendStatus(401);
-  }
-}
 
 // Return information about the currently authenticated user
 router.get('/me', auth, (req, res) => {

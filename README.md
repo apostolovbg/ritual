@@ -60,6 +60,7 @@ If you prefer a browser-based environment, open `test/index.html`. It simply ins
 - `AGENTS.md` &ndash; project LAWS and development history
 - `CHANGELOG.md` &ndash; chronological list of releases
 - `TODO.md` &ndash; roadmap for upcoming phases
+- `src/middleware/auth.js` &ndash; reusable JWT authentication middleware
 
 ## API Overview
 

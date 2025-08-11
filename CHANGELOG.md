@@ -2,6 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
+2025-08-11: Centralized JWT auth middleware for reuse across routers (assistant)
 2025-08-11: Enforced presence of JWT_SECRET via centralized config utility (assistant)
 
 ## [1.3.0] - 2025-07-24
