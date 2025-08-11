@@ -1,21 +1,69 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>RITUAL Test Frontend</title>
+  <title>EDI to JSON Converter</title>
+  <!-- Link the dedicated stylesheet for layout and theme -->
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <nav>
-    <button id="nav-register">Register</button>
-    <button id="nav-login">Login</button>
-    <button id="nav-logout" style="display:none">Logout</button>
-    <button id="nav-profile">Profile</button>
-    <button id="nav-artists">Artists</button>
-    <button id="nav-clubs">Venues</button>
-    <button id="nav-events">Events</button>
-    <button id="nav-create-event">Create Event</button>
-  </nav>
-  <div id="content"></div>
-  <script src="main.js"></script>
+  <!-- Simple header keeps branding consistent across the project -->
+  <header>
+    <h1>EDI to JSON Converter</h1>
+  </header>
+
+  <!--
+    The main area is split into a two column grid.
+    Left: capture EDI input via upload, raw text or built‑in samples.
+    Right: display the JSON output and interaction controls.
+  -->
+  <main class="grid">
+    <section id="input-section">
+      <!-- Tab buttons allow the user to choose their preferred input method -->
+      <div class="tabs">
+        <button class="tab active" data-tab="upload">Upload</button>
+        <button class="tab" data-tab="text">Text</button>
+        <button class="tab" data-tab="sample">Sample</button>
+      </div>
+
+      <!-- Upload tab content: drag and drop is simulated via styled input -->
+      <div class="tab-content" id="upload-content">
+        <input type="file" id="edi-file" accept=".edi,.txt">
+      </div>
+
+      <!-- Text tab content: allows manual editing or pasting of EDI data -->
+      <div class="tab-content hidden" id="text-content">
+        <textarea id="edi-text" placeholder="Paste EDI here"></textarea>
+      </div>
+
+      <!-- Sample tab content: loads predefined EDI examples from the server -->
+      <div class="tab-content hidden" id="sample-content">
+        <button class="sample-btn" data-file="sample1.edi">Sample 1</button>
+        <button class="sample-btn" data-file="sample2.edi">Sample 2</button>
+      </div>
+
+      <!-- Conversion is triggered explicitly so users can review input first -->
+      <button id="convert-btn">Convert</button>
+    </section>
+
+    <section id="output-section">
+      <!-- The spinner provides feedback during network calls -->
+      <div id="spinner" class="spinner hidden"></div>
+
+      <!-- JSON output is printed inside a pre block to preserve formatting -->
+      <pre id="output" class="json-output"></pre>
+
+      <!-- Copy button is hidden until valid JSON is displayed -->
+      <button id="copy-btn" class="hidden">Copy JSON</button>
+    </section>
+  </main>
+
+  <!-- Footer keeps the page visually grounded -->
+  <footer>
+    <p>&copy; 2025 RITUAL</p>
+  </footer>
+
+  <!-- Dedicated script keeps the page modular and testable -->
+  <script src="script.js"></script>
 </body>
 </html>
