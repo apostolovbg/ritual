@@ -1,8 +1,11 @@
 import request from 'supertest';
 import app, { dbPromise } from '../src/app.js';
 
+// Integration tests exercising event creation, editing and booking flows.
+
 let clubToken, artistToken, clubId, eventId;
 
+// Fresh database ensures predictable test behavior
 beforeAll(async () => {
   const db = await dbPromise;
   // Cascading deletes mean removing users clears related profiles, events and bookings

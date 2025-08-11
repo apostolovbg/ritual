@@ -6,6 +6,9 @@ import { initDb } from './db.js';
 import users from './routes/users.js';
 import events from './routes/events.js';
 
+// Primary Express application setup. Routers are mounted for feature modules
+// and exported for use by both tests and the HTTP server.
+
 const app = express();
 // Accept JSON bodies from API clients
 app.use(express.json());

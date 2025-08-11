@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
+// Shows all club/venue profiles.
 function Clubs() {
   const [clubs, setClubs] = useState([]);
 
+  // Fetch list on mount
   useEffect(() => {
     fetch('/clubs').then(res => res.json()).then(setClubs);
   }, []);

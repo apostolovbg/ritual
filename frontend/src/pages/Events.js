@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../AuthContext.js';
 
+// Lists all events and lets logged-in artists request a booking.
 function Events() {
   const { token } = useAuth();
   const [events, setEvents] = useState([]);
 
+  // Load events once on mount
   useEffect(() => {
     fetch('/events')
       .then(res => res.json())
       .then(setEvents);
   }, []);
 
+  // Send booking request for the selected event
   async function book(event) {
     await fetch('/bookings', {
       method: 'POST',

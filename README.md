@@ -1,6 +1,6 @@
 # RITUAL Web App
 
-**Version 1.6.0**
+**Version 1.6.1**
 
 This repository hosts the full stack implementation of the RITUAL web application. Development rules are defined in `AGENTS.md`, which outlines mandatory practices and versioning guidelines. Earlier planning files such as `pickup.json` and all Python sources have been removed; their history remains in the git log and `CHANGELOG.md`.
 
@@ -40,6 +40,15 @@ You can also build and run the service with Docker:
 ```bash
 docker compose up --build
 ```
+
+## Development Guidelines
+
+Adhere to the project LAWS in `AGENTS.md` and the following conventions:
+
+- Favor clear, descriptive comments even for straightforward logic.
+- Keep modules focused on a single feature and export reusable pieces.
+- Run `npm test` and `cd frontend && npm test` before committing.
+- Bump version numbers and update `CHANGELOG.md` and `README.md` with every change.
 
 ## Frontend
 

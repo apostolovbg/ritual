@@ -15,10 +15,15 @@ import Artists from './pages/Artists.js';
 import Clubs from './pages/Clubs.js';
 import PublicProfile from './pages/PublicProfile.js';
 
+// Application root controlling client-side routes and navigation links.
+// Each page component below is intentionally lightweight and focuses on
+// demonstrating API usage rather than production-ready UX.
+
 function App() {
   return (
     <AuthProvider>
       <Router>
+        {/* Simple navigation bar for demo purposes */}
         <nav className="p-2 bg-gray-200 flex gap-2">
           <Link to="/register">Register</Link>
           <Link to="/login">Login</Link>
@@ -28,6 +33,7 @@ function App() {
           <Link to="/events">Events</Link>
           <Link to="/create-event">Create Event</Link>
         </nav>
+        {/* Route declarations map URLs to page components */}
         <Routes>
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
