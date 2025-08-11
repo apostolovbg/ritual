@@ -11,11 +11,16 @@ beforeAll(async () => {
 let token;
 let userId;
 
+it('rejects invalid registration data', async () => {
+  const res = await request(app).post('/register').send({ email: 'bad', role: 'artist' });
+  expect(res.statusCode).toBe(400);
+});
+
 it('registers and logs in user', async () => {
-  const res = await request(app).post('/register').send({ email: 'user@example.com', password: 'pass', role: 'artist' });
+  const res = await request(app).post('/register').send({ email: 'user@example.com', password: 'password', role: 'artist' });
   expect(res.statusCode).toBe(200);
   userId = res.body.id;
-  const login = await request(app).post('/login').send({ email: 'user@example.com', password: 'pass' });
+  const login = await request(app).post('/login').send({ email: 'user@example.com', password: 'password' });
   expect(login.statusCode).toBe(200);
   token = login.body.access_token;
   const me = await request(app).get('/me').set('Authorization', `Bearer ${token}`);
