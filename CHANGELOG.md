@@ -12,6 +12,14 @@ All notable changes to this project will be documented in this file.
 2025-08-11: Cascading deletes applied to foreign keys with updated tests and docs (assistant)
 2025-08-11: Expanded comments and documentation; bumped versions to 1.6.1/0.1.1 (assistant)
 
+## [1.7.0] - 2025-08-11
+### Added
+- Responsive navigation bar and form styling in React frontend.
+- Placeholder endpoints for payments, analytics, notifications, AI recommendations and blockchain rewards.
+- Tests covering new experimental routes.
+### Changed
+- Updated documentation and version numbers for phases 4–6 progress.
+
 ## [1.3.0] - 2025-07-24
 ### Added
 - Static `public` directory with `index.html` and JavaScript for manual API testing.
