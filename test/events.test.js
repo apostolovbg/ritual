@@ -5,10 +5,7 @@ let clubToken, artistToken, clubId, eventId;
 
 beforeAll(async () => {
   const db = await dbPromise;
-  await db.exec('DELETE FROM bookings');
-  await db.exec('DELETE FROM events');
-  await db.exec('DELETE FROM artist_profiles');
-  await db.exec('DELETE FROM club_profiles');
+  // Cascading deletes mean removing users clears related profiles, events and bookings
   await db.exec('DELETE FROM users');
 });
 

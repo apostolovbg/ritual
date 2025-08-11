@@ -32,8 +32,8 @@ Set `JWT_SECRET` (required— the server will not start without it) and optional
 node src/server.js
 ```
 
-SQLite now enforces foreign key constraints, preventing records from referencing non-existent parents.
-Test suites clear the database in dependency order—bookings, events, artist profiles, club profiles, then users—to respect these constraints.
+SQLite now enforces foreign key constraints and uses `ON DELETE CASCADE` so related profiles, events and bookings are automatically removed when a user or event is deleted.
+As a result, tests reset the database by deleting from `users`, which cascades to all dependent tables.
 
 You can also build and run the service with Docker:
 
