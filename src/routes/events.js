@@ -1,30 +1,12 @@
 import { Router } from 'express';
 import { dbPromise } from '../app.js';
-import jwt from 'jsonwebtoken';
-import { jwtSecret } from '../config.js';
+import auth from '../middleware/auth.js'; // Reusable JWT auth middleware
 
 // Router managing event creation and booking workflows
 
 const router = Router();
-// JWT secret is imported from the shared config, guaranteeing it exists.
-
-// Middleware verifying a user's JWT before allowing access to protected routes
-async function auth(req, res, next) {
-  const header = req.headers.authorization;
-  if (!header) return res.sendStatus(401);
-  const token = header.split(' ')[1];
-  try {
-    // Verify incoming tokens using the centrally configured secret.
-    const decoded = jwt.verify(token, jwtSecret);
-    const db = await dbPromise;
-    const user = await db.get('SELECT * FROM users WHERE id = ?', decoded.sub);
-    if (!user) throw new Error('not found');
-    req.user = user;
-    next();
-  } catch {
-    res.sendStatus(401);
-  }
-}
+// Routes below rely on the shared auth middleware which verifies tokens using
+// the centrally configured JWT secret.
 
 // Club users create events that artists can request to join
 router.post('/events', auth, async (req, res) => {
