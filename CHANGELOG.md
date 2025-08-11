@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file.
 2025-08-11: Enforced presence of JWT_SECRET via centralized config utility (assistant)
 2025-08-11: Added input validation for registration and event routes (assistant)
 2025-08-11: Cascading deletes applied to foreign keys with updated tests and docs (assistant)
+2025-08-11: Expanded comments and documentation; bumped versions to 1.6.1/0.1.1 (assistant)
 
 ## [1.3.0] - 2025-07-24
 ### Added

@@ -1,5 +1,6 @@
 import { dbPromise } from '../src/app.js';
 
+// Low-level tests asserting database foreign key constraints and cascading deletes.
 beforeAll(async () => {
   const db = await dbPromise;
   // Cascading deletes allow us to clear the entire schema with one statement

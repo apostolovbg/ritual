@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { useAuth } from '../AuthContext.js';
 
+// Minimal form for venues to create a new event.
 function CreateEvent() {
   const { token } = useAuth();
   const [title, setTitle] = useState('');
 
+  // Submit the event to the backend API
   async function submit(e) {
     e.preventDefault();
     await fetch('/events', {

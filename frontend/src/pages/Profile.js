@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../AuthContext.js';
 
+// Profile editor for both artists and clubs. Fields differ depending on role
+// but are saved through the same API endpoint.
 function Profile() {
   const { token } = useAuth();
   const [user, setUser] = useState(null);
   const [profile, setProfile] = useState({});
 
+  // Load account and profile details once a token is available
   useEffect(() => {
     if (!token) return;
     async function load() {
@@ -17,10 +20,12 @@ function Profile() {
     load();
   }, [token]);
 
+  // Local helper to update a single field in the profile state
   function update(field, value) {
     setProfile(p => ({ ...p, [field]: value }));
   }
 
+  // Persist the profile to the backend then reload from the database
   async function save() {
     await fetch('/me/profile', {
       method: 'PUT',

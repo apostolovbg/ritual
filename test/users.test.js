@@ -1,6 +1,9 @@
 import request from 'supertest';
 import app, { dbPromise } from '../src/app.js';
 
+// End-to-end tests validating user registration, authentication and profile CRUD operations.
+
+// Reset database state so tests run in isolation
 beforeAll(async () => {
   const db = await dbPromise;
   // A single user purge clears dependent tables thanks to ON DELETE CASCADE

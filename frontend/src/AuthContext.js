@@ -1,15 +1,19 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 
+// Context wrapper managing authentication state for the demo frontend.
+// Tokens are stored in localStorage so they persist across refreshes.
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
   const [token, setToken] = useState(null);
 
+  // On mount, read any previously saved token to keep users logged in
   useEffect(() => {
     const stored = localStorage.getItem('token');
     if (stored) setToken(stored);
   }, []);
 
+  // Call the API login endpoint and persist the returned JWT
   async function login(email, password) {
     const res = await fetch('/login', {
       method: 'POST',
@@ -25,6 +29,7 @@ export function AuthProvider({ children }) {
     }
   }
 
+  // Registration is followed immediately by a login to reuse logic above
   async function register(email, password, role) {
     await fetch('/register', {
       method: 'POST',
@@ -34,6 +39,7 @@ export function AuthProvider({ children }) {
     return login(email, password);
   }
 
+  // Simple logout clears the token from state and storage
   async function logout() {
     localStorage.removeItem('token');
     setToken(null);

@@ -5,6 +5,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { AuthProvider } from './AuthContext.js';
 import Login from './pages/Login.js';
 
+// Ensure the login form saves the returned JWT to localStorage
 test('login stores token in localStorage', async () => {
   globalThis.fetch = jest.fn().mockResolvedValue({
     ok: true,
