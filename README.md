@@ -12,7 +12,7 @@ This repository hosts the full stack implementation of the RITUAL web applicatio
 npm install
 ```
 
-2. Run tests:
+2. Run tests (a fallback JWT secret is supplied automatically):
 
 ```bash
 npm test
