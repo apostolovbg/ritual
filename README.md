@@ -1,6 +1,6 @@
 # RITUAL Web App
 
-**Version 1.6.1**
+**Version 1.7.0**
 
 This repository hosts the full stack implementation of the RITUAL web application. Development rules are defined in `AGENTS.md`, which outlines mandatory practices and versioning guidelines. Earlier planning files such as `pickup.json` and all Python sources have been removed; their history remains in the git log and `CHANGELOG.md`.
 
@@ -54,7 +54,7 @@ Adhere to the project LAWS in `AGENTS.md` and the following conventions:
 
 Static pages for operational testing live in the `public` directory. Open `public/index.html` in a browser while the server is running to interact with the API.
 
-The React application under `frontend` now offers the same features with a richer interface. Users can edit their entire profile, browse all artists or venues and view public profiles. Information persists so details remain after logging out and back in.
+The React application under `frontend` now offers the same features with a richer interface and a responsive navigation bar. Users can edit their entire profile, browse all artists or venues and view public profiles. Information persists so details remain after logging out and back in.
 
 Install the frontend dependencies and run its tests with:
 
@@ -93,6 +93,11 @@ The backend currently supports the following operations:
 - `GET /clubs` – list venue profiles
 - `GET /profiles/{id}` – get a single public profile
 - `GET /clubs/{id}/events` – list events for a club
+- `POST /payments/checkout` – simulate payment processing
+- `GET /analytics/summary` – retrieve basic in-memory metrics
+- `POST /notifications/email` – stub endpoint acknowledging email requests
+- `GET /recommendations` – sample AI-generated event suggestions
+- `GET /rewards/{userId}` – mock blockchain token balance
 
 Registration and event creation endpoints validate input and return helpful
 HTTP 400 messages when required fields are missing or incorrectly formatted.

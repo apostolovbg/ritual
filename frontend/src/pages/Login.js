@@ -13,12 +13,12 @@ function Login() {
         e.preventDefault();
         login(email, password); // Attempt login with provided credentials
       }}
-      className="p-4 space-y-2"
+      className="max-w-sm mx-auto mt-8 p-6 space-y-4 bg-white rounded shadow"
     >
       {/* Controlled inputs keep component state in sync with form fields */}
-      <input className="border p-2" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} />
-      <input className="border p-2" type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
-      <button className="bg-blue-500 text-white p-2" type="submit">Login</button>
+      <input className="w-full border p-2 rounded" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} />
+      <input className="w-full border p-2 rounded" type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
+      <button className="w-full bg-blue-500 hover:bg-blue-600 text-white p-2 rounded" type="submit">Login</button>
     </form>
   );
 }

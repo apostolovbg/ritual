@@ -2,8 +2,7 @@ import React from 'react';
 import {
   BrowserRouter as Router,
   Routes,
-  Route,
-  Link
+  Route
 } from 'react-router-dom';
 import { AuthProvider } from './AuthContext.js';
 import Login from './pages/Login.js';
@@ -14,6 +13,7 @@ import CreateEvent from './pages/CreateEvent.js';
 import Artists from './pages/Artists.js';
 import Clubs from './pages/Clubs.js';
 import PublicProfile from './pages/PublicProfile.js';
+import NavBar from './components/NavBar.js';
 
 // Application root controlling client-side routes and navigation links.
 // Each page component below is intentionally lightweight and focuses on
@@ -23,16 +23,8 @@ function App() {
   return (
     <AuthProvider>
       <Router>
-        {/* Simple navigation bar for demo purposes */}
-        <nav className="p-2 bg-gray-200 flex gap-2">
-          <Link to="/register">Register</Link>
-          <Link to="/login">Login</Link>
-          <Link to="/profile">Profile</Link>
-          <Link to="/artists">Artists</Link>
-          <Link to="/venues">Venues</Link>
-          <Link to="/events">Events</Link>
-          <Link to="/create-event">Create Event</Link>
-        </nav>
+        {/* Responsive navigation component introduced in Phase 4 */}
+        <NavBar />
         {/* Route declarations map URLs to page components */}
         <Routes>
           <Route path="/register" element={<Register />} />
