@@ -7,6 +7,8 @@ import { open } from 'sqlite';
 export async function initDb() {
   // Open a connection to the SQLite file. The driver provides a Promise-based API
   const db = await open({ filename: 'database.sqlite', driver: sqlite3.Database });
+  // Enforce foreign key constraints so orphaned references are rejected
+  await db.run('PRAGMA foreign_keys = ON');
   await db.exec(`
     CREATE TABLE IF NOT EXISTS users (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
