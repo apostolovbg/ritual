@@ -2,17 +2,18 @@ import { Router } from 'express';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { dbPromise } from '../app.js';
+import { jwtSecret } from '../config.js';
 
 // Router handling user registration, login and profile management
 
 const router = Router();
-// JWT secret used to sign authentication tokens. In production this should
-// come from an environment variable.
-const SECRET = process.env.JWT_SECRET || 'secret';
+// JWT secret used to sign authentication tokens. Importing from the central
+// config ensures the application fails fast if the variable is missing.
 
 // Helper function to create a short-lived JWT
 function signToken(id) {
-  return jwt.sign({ sub: id }, SECRET, { expiresIn: '1h' });
+  // Sign tokens with the configured secret; tokens expire quickly to limit exposure.
+  return jwt.sign({ sub: id }, jwtSecret, { expiresIn: '1h' });
 }
 
 // Create a new user account and associated empty profile
@@ -57,7 +58,7 @@ async function auth(req, res, next) {
   if (!header) return res.sendStatus(401);
   const token = header.split(' ')[1];
   try {
-    const decoded = jwt.verify(token, SECRET);
+    const decoded = jwt.verify(token, jwtSecret);
     const db = await dbPromise;
     const user = await db.get('SELECT * FROM users WHERE id = ?', decoded.sub);
     if (!user) throw new Error('not found');
