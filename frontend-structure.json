@@ -1,0 +1,135 @@
+
+{
+  "frontend": {
+    "framework": "Vanilla HTML/CSS/JavaScript",
+    "structure": {
+      "html": {
+        "file": "public/index.html",
+        "title": "EDI to JSON Converter",
+        "sections": [
+          {
+            "name": "header",
+            "elements": ["h1", "p"],
+            "content": "Title and description"
+          },
+          {
+            "name": "main",
+            "class": "converter-section",
+            "layout": "grid (2 columns)",
+            "sections": [
+              {
+                "name": "input-section",
+                "features": [
+                  "tabs (upload, text, sample)",
+                  "file upload input",
+                  "textarea for EDI text",
+                  "sample file buttons",
+                  "convert button"
+                ]
+              },
+              {
+                "name": "output-section",
+                "features": [
+                  "loading spinner",
+                  "JSON output container",
+                  "copy button"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "footer",
+            "content": "Powered by Stedi.com"
+          }
+        ]
+      },
+      "css": {
+        "file": "public/style.css",
+        "features": [
+          "responsive design",
+          "gradient background",
+          "grid layout",
+          "tab system",
+          "file upload styling",
+          "button animations",
+          "loading spinner",
+          "syntax highlighting colors",
+          "mobile responsive (@media queries)"
+        ],
+        "color_scheme": {
+          "primary": "#667eea",
+          "secondary": "#764ba2",
+          "background": "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+          "text": "#333",
+          "code_bg": "#1a202c",
+          "code_text": "#e2e8f0"
+        }
+      },
+      "javascript": {
+        "file": "public/script.js",
+        "functions": [
+          {
+            "name": "switchTab",
+            "purpose": "Handle tab switching between upload/text/sample"
+          },
+          {
+            "name": "loadSample",
+            "purpose": "Load sample EDI files from server"
+          },
+          {
+            "name": "handleResponse",
+            "purpose": "Process API response and display JSON"
+          },
+          {
+            "name": "showError",
+            "purpose": "Display error messages"
+          },
+          {
+            "name": "convertEDI",
+            "purpose": "Main conversion function - sends data to backend"
+          },
+          {
+            "name": "copyJSON",
+            "purpose": "Copy converted JSON to clipboard"
+          }
+        ],
+        "event_handlers": [
+          "file input change",
+          "tab button clicks",
+          "convert button click",
+          "copy button click"
+        ],
+        "api_endpoints": [
+          "/convert (POST)",
+          "/sample/:filename (GET)"
+        ]
+      }
+    },
+    "user_interface": {
+      "input_methods": [
+        "File upload (.edi, .txt files)",
+        "Text paste (textarea)",
+        "Sample files (3 predefined EDI documents)"
+      ],
+      "output_format": "Formatted JSON with syntax highlighting",
+      "interactions": [
+        "Tab switching",
+        "File selection with visual feedback",
+        "Loading states during conversion",
+        "Copy to clipboard functionality",
+        "Error handling and display"
+      ]
+    },
+    "styling_approach": {
+      "methodology": "Custom CSS (no framework)",
+      "responsive": true,
+      "animations": [
+        "button hover effects",
+        "loading spinner",
+        "tab transitions"
+      ],
+      "typography": "System font stack",
+      "layout": "CSS Grid and Flexbox"
+    }
+  }
+}

@@ -1,26 +1,57 @@
 import request from 'supertest';
 import app, { dbPromise } from '../src/app.js';
 
+// End-to-end tests validating user registration, authentication and profile CRUD operations.
+
+// Reset database state so tests run in isolation
 beforeAll(async () => {
   const db = await dbPromise;
+  // A single user purge clears dependent tables thanks to ON DELETE CASCADE
   await db.exec('DELETE FROM users');
-  await db.exec('DELETE FROM artist_profiles');
-  await db.exec('DELETE FROM club_profiles');
 });
 
 let token;
 let userId;
 
+it('rejects invalid registration data', async () => {
+  const res = await request(app).post('/register').send({ email: 'bad', role: 'artist' });
+  expect(res.statusCode).toBe(400);
+});
+
 it('registers and logs in user', async () => {
-  const res = await request(app).post('/register').send({ email: 'user@example.com', password: 'pass', role: 'artist' });
+  const res = await request(app).post('/register').send({ email: 'user@example.com', password: 'password', role: 'artist' });
   expect(res.statusCode).toBe(200);
   userId = res.body.id;
-  const login = await request(app).post('/login').send({ email: 'user@example.com', password: 'pass' });
+  const login = await request(app).post('/login').send({ email: 'user@example.com', password: 'password' });
   expect(login.statusCode).toBe(200);
   token = login.body.access_token;
   const me = await request(app).get('/me').set('Authorization', `Bearer ${token}`);
   expect(me.statusCode).toBe(200);
   expect(me.body.email).toBe('user@example.com');
+});
+
+// Ensure the API rejects attempts to register an email that already exists
+it('rejects duplicate registration', async () => {
+  const res = await request(app)
+    .post('/register')
+    .send({ email: 'user@example.com', password: 'password', role: 'artist' });
+  expect(res.statusCode).toBe(400);
+  expect(res.body.error).toBe('Email already registered');
+});
+
+// Login with an incorrect password should not succeed and must return a 400
+it('fails login with wrong password', async () => {
+  const res = await request(app)
+    .post('/login')
+    .send({ email: 'user@example.com', password: 'wrong' });
+  expect(res.statusCode).toBe(400);
+  expect(res.body.error).toBe('Incorrect email or password');
+});
+
+// Protected routes like /me require a valid JWT token in the Authorization header
+it('rejects unauthenticated access to /me', async () => {
+  const res = await request(app).get('/me');
+  expect(res.statusCode).toBe(401);
 });
 
 it('updates and retrieves profile', async () => {

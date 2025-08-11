@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
+// Displays a list of all artist profiles with links to their public pages.
 function Artists() {
   const [artists, setArtists] = useState([]);
 
+  // Fetch list on mount
   useEffect(() => {
     fetch('/artists').then(res => res.json()).then(setArtists);
   }, []);

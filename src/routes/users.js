@@ -1,43 +1,66 @@
 import { Router } from 'express';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import { body, validationResult } from 'express-validator';
 import { dbPromise } from '../app.js';
+import { jwtSecret } from '../config.js';
+import auth from '../middleware/auth.js'; // Shared JWT validation middleware
 
 // Router handling user registration, login and profile management
 
 const router = Router();
-// JWT secret used to sign authentication tokens. In production this should
-// come from an environment variable.
-const SECRET = process.env.JWT_SECRET || 'secret';
+// JWT secret used to sign authentication tokens. Importing from the central
+// config ensures the application fails fast if the variable is missing.
 
 // Helper function to create a short-lived JWT
 function signToken(id) {
-  return jwt.sign({ sub: id }, SECRET, { expiresIn: '1h' });
+  // Sign tokens with the configured secret; tokens expire quickly to limit exposure.
+  return jwt.sign({ sub: id }, jwtSecret, { expiresIn: '1h' });
 }
 
-// Create a new user account and associated empty profile
-router.post('/register', async (req, res) => {
-  const db = await dbPromise;
-  const { email, password, role } = req.body;
-  const hashed = await bcrypt.hash(password, 10);
-  try {
-    const result = await db.run(
-      'INSERT INTO users (email, hashed_password, role) VALUES (?, ?, ?)',
-      email,
-      hashed,
-      role
-    );
-    const id = result.lastID;
-    if (role === 'artist') {
-      await db.run('INSERT INTO artist_profiles (user_id) VALUES (?)', id);
-    } else if (role === 'club') {
-      await db.run('INSERT INTO club_profiles (user_id) VALUES (?)', id);
+// Create a new user account and associated empty profile. Input is validated
+// to ensure registration data is well formed before hitting the database.
+router.post(
+  '/register',
+  [
+    // Email must be present and formatted correctly
+    body('email').isEmail().withMessage('Valid email required'),
+    // Enforce a minimum password length for basic strength
+    body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters'),
+    // Role determines which profile table is initialized
+    body('role').isIn(['artist', 'club']).withMessage('Role must be artist or club')
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      // Collect validation issues and return a detailed 400 response
+      return res.status(400).json({
+        errors: errors.array().map((e) => ({ field: e.param, message: e.msg }))
+      });
     }
-    res.json({ id, email, role });
-  } catch (e) {
-    res.status(400).json({ error: 'Email already registered' });
+    const db = await dbPromise;
+    const { email, password, role } = req.body;
+    const hashed = await bcrypt.hash(password, 10);
+    try {
+      const result = await db.run(
+        'INSERT INTO users (email, hashed_password, role) VALUES (?, ?, ?)',
+        email,
+        hashed,
+        role
+      );
+      const id = result.lastID;
+      // Initialize the appropriate empty profile depending on role
+      if (role === 'artist') {
+        await db.run('INSERT INTO artist_profiles (user_id) VALUES (?)', id);
+      } else if (role === 'club') {
+        await db.run('INSERT INTO club_profiles (user_id) VALUES (?)', id);
+      }
+      res.json({ id, email, role });
+    } catch (e) {
+      res.status(400).json({ error: 'Email already registered' });
+    }
   }
-});
+);
 
 // Authenticate a user and return a JWT
 router.post('/login', async (req, res) => {
@@ -50,23 +73,6 @@ router.post('/login', async (req, res) => {
   const token = signToken(user.id);
   res.json({ access_token: token });
 });
-
-// Middleware to verify the JWT and attach the user record
-async function auth(req, res, next) {
-  const header = req.headers.authorization;
-  if (!header) return res.sendStatus(401);
-  const token = header.split(' ')[1];
-  try {
-    const decoded = jwt.verify(token, SECRET);
-    const db = await dbPromise;
-    const user = await db.get('SELECT * FROM users WHERE id = ?', decoded.sub);
-    if (!user) throw new Error('not found');
-    req.user = user;
-    next();
-  } catch {
-    res.sendStatus(401);
-  }
-}
 
 // Return information about the currently authenticated user
 router.get('/me', auth, (req, res) => {

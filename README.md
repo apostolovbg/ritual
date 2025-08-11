@@ -1,6 +1,6 @@
 # RITUAL Web App
 
-**Version 1.5.2**
+**Version 1.7.0**
 
 This repository hosts the full stack implementation of the RITUAL web application. Development rules are defined in `AGENTS.md`, which outlines mandatory practices and versioning guidelines. Earlier planning files such as `pickup.json` and all Python sources have been removed; their history remains in the git log and `CHANGELOG.md`.
 
@@ -12,7 +12,7 @@ This repository hosts the full stack implementation of the RITUAL web applicatio
 npm install
 ```
 
-2. Run tests:
+2. Run tests (a fallback JWT secret is supplied automatically):
 
 ```bash
 npm test
@@ -24,7 +24,7 @@ npm test
 cp .env.example .env
 ```
 
-Set `JWT_SECRET` and optionally `PORT` in the `.env` file.
+Set `JWT_SECRET` (required— the server will not start without it) and optionally `PORT` in the `.env` file.
 
 4. Start the development server:
 
@@ -32,17 +32,29 @@ Set `JWT_SECRET` and optionally `PORT` in the `.env` file.
 node src/server.js
 ```
 
+SQLite now enforces foreign key constraints and uses `ON DELETE CASCADE` so related profiles, events and bookings are automatically removed when a user or event is deleted.
+As a result, tests reset the database by deleting from `users`, which cascades to all dependent tables.
+
 You can also build and run the service with Docker:
 
 ```bash
 docker compose up --build
 ```
 
+## Development Guidelines
+
+Adhere to the project LAWS in `AGENTS.md` and the following conventions:
+
+- Favor clear, descriptive comments even for straightforward logic.
+- Keep modules focused on a single feature and export reusable pieces.
+- Run `npm test` and `cd frontend && npm test` before committing.
+- Bump version numbers and update `CHANGELOG.md` and `README.md` with every change.
+
 ## Frontend
 
 Static pages for operational testing live in the `public` directory. Open `public/index.html` in a browser while the server is running to interact with the API.
 
-The React application under `frontend` now offers the same features with a richer interface. Users can edit their entire profile, browse all artists or venues and view public profiles. Information persists so details remain after logging out and back in.
+The React application under `frontend` now offers the same features with a richer interface and a responsive navigation bar. Users can edit their entire profile, browse all artists or venues and view public profiles. Information persists so details remain after logging out and back in.
 
 Install the frontend dependencies and run its tests with:
 
@@ -60,6 +72,7 @@ If you prefer a browser-based environment, open `test/index.html`. It simply ins
 - `AGENTS.md` &ndash; project LAWS and development history
 - `CHANGELOG.md` &ndash; chronological list of releases
 - `TODO.md` &ndash; roadmap for upcoming phases
+- `src/middleware/auth.js` &ndash; reusable JWT authentication middleware
 
 ## API Overview
 
@@ -80,6 +93,17 @@ The backend currently supports the following operations:
 - `GET /clubs` – list venue profiles
 - `GET /profiles/{id}` – get a single public profile
 - `GET /clubs/{id}/events` – list events for a club
+- `POST /payments/checkout` – simulate payment processing
+- `GET /analytics/summary` – retrieve basic in-memory metrics
+- `POST /notifications/email` – stub endpoint acknowledging email requests
+- `GET /recommendations` – sample AI-generated event suggestions
+- `GET /rewards/{userId}` – mock blockchain token balance
+
+Registration and event creation endpoints validate input and return helpful
+HTTP 400 messages when required fields are missing or incorrectly formatted.
+Unauthorized or role-mismatched requests, such as duplicate registrations,
+bad login attempts, or booking with the wrong account type, return 400–403
+errors with descriptive messages.
 
 ## Development History
 

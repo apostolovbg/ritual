@@ -7,6 +7,8 @@ import { open } from 'sqlite';
 export async function initDb() {
   // Open a connection to the SQLite file. The driver provides a Promise-based API
   const db = await open({ filename: 'database.sqlite', driver: sqlite3.Database });
+  // Enforce foreign key constraints so orphaned references are rejected
+  await db.run('PRAGMA foreign_keys = ON');
   await db.exec(`
     CREATE TABLE IF NOT EXISTS users (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -29,7 +31,8 @@ export async function initDb() {
       genres TEXT DEFAULT '',
       photo_path TEXT DEFAULT '',
       social_links TEXT DEFAULT '',
-      FOREIGN KEY(user_id) REFERENCES users(id)
+      -- Cascade profile removal if the parent user account is deleted
+      FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
     );
     CREATE TABLE IF NOT EXISTS club_profiles (
       user_id INTEGER PRIMARY KEY,
@@ -41,7 +44,8 @@ export async function initDb() {
       genres TEXT DEFAULT '',
       hours TEXT DEFAULT '',
       about TEXT DEFAULT '',
-      FOREIGN KEY(user_id) REFERENCES users(id)
+      -- Club profile disappears automatically when the owning user is removed
+      FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
     );
     CREATE TABLE IF NOT EXISTS events (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -52,7 +56,8 @@ export async function initDb() {
       end_time TEXT DEFAULT '',
       location TEXT DEFAULT '',
       genres TEXT DEFAULT '',
-      FOREIGN KEY(club_id) REFERENCES users(id)
+      -- Club events vanish when the club account is deleted
+      FOREIGN KEY(club_id) REFERENCES users(id) ON DELETE CASCADE
     );
     CREATE TABLE IF NOT EXISTS bookings (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -60,9 +65,10 @@ export async function initDb() {
       club_id INTEGER NOT NULL,
       event_id INTEGER,
       status TEXT DEFAULT 'pending',
-      FOREIGN KEY(artist_id) REFERENCES users(id),
-      FOREIGN KEY(club_id) REFERENCES users(id),
-      FOREIGN KEY(event_id) REFERENCES events(id)
+      -- Bookings are tied to users and events; deleting any parent cascades here
+      FOREIGN KEY(artist_id) REFERENCES users(id) ON DELETE CASCADE,
+      FOREIGN KEY(club_id) REFERENCES users(id) ON DELETE CASCADE,
+      FOREIGN KEY(event_id) REFERENCES events(id) ON DELETE CASCADE
     );
   `);
   // Return the database instance so routers can perform queries

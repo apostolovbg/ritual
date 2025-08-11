@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
+2025-08-11: Adjusted events test cleanup order to respect foreign key dependencies (assistant)
+2025-08-11: Added user test cleanup for bookings, events, and profiles before user deletion (assistant)
+2025-08-11: Added tests for duplicate registration, bad login, and unauthorized event or booking actions (assistant)
+2025-08-11: Enabled SQLite foreign key enforcement to maintain relational integrity (assistant)
+2025-08-11: Centralized JWT auth middleware for reuse across routers (assistant)
+2025-08-11: Enforced presence of JWT_SECRET via centralized config utility (assistant)
+2025-08-11: Added input validation for registration and event routes (assistant)
+2025-08-11: Cascading deletes applied to foreign keys with updated tests and docs (assistant)
+2025-08-11: Expanded comments and documentation; bumped versions to 1.6.1/0.1.1 (assistant)
+
+## [1.7.0] - 2025-08-11
+### Added
+- Responsive navigation bar and form styling in React frontend.
+- Placeholder endpoints for payments, analytics, notifications, AI recommendations and blockchain rewards.
+- Tests covering new experimental routes.
+### Changed
+- Updated documentation and version numbers for phases 4–6 progress.
+
 ## [1.3.0] - 2025-07-24
 ### Added
 - Static `public` directory with `index.html` and JavaScript for manual API testing.

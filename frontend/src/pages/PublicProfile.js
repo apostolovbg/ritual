@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
+// Read-only view of a public artist or club profile based on the ID in the URL.
 function PublicProfile() {
   const { id } = useParams();
   const [profile, setProfile] = useState(null);
 
+  // Fetch the profile whenever the id param changes
   useEffect(() => {
     fetch(`/profiles/${id}`).then(res => res.json()).then(setProfile);
   }, [id]);
