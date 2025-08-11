@@ -2,7 +2,6 @@
 
 All notable changes to this project will be documented in this file.
 
-2025-08-11: Added EDI to JSON converter frontend with tabbed inputs and copy feature (assistant)
 2025-08-11: Added tests for duplicate registration, bad login, and unauthorized event or booking actions (assistant)
 2025-08-11: Enabled SQLite foreign key enforcement to maintain relational integrity (assistant)
 2025-08-11: Centralized JWT auth middleware for reuse across routers (assistant)

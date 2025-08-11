@@ -44,8 +44,6 @@ docker compose up --build
 
 Static pages for operational testing live in the `public` directory. Open `public/index.html` in a browser while the server is running to interact with the API.
 
-The page now includes an EDI to JSON converter with upload, text and sample tabs. Results are displayed with syntax highlighting and can be copied to the clipboard for rapid testing.
-
 The React application under `frontend` now offers the same features with a richer interface. Users can edit their entire profile, browse all artists or venues and view public profiles. Information persists so details remain after logging out and back in.
 
 Install the frontend dependencies and run its tests with:
