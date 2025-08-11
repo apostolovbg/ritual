@@ -5,11 +5,11 @@ let clubToken, artistToken, clubId, eventId;
 
 beforeAll(async () => {
   const db = await dbPromise;
-  await db.exec('DELETE FROM bookings');
-  await db.exec('DELETE FROM events');
+  await db.exec('DELETE FROM users');
   await db.exec('DELETE FROM artist_profiles');
   await db.exec('DELETE FROM club_profiles');
-  await db.exec('DELETE FROM users');
+  await db.exec('DELETE FROM events');
+  await db.exec('DELETE FROM bookings');
 });
 
 test('event and booking flow', async () => {

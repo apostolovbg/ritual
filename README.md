@@ -1,6 +1,6 @@
 # RITUAL Web App
 
-**Version 1.7.0**
+**Version 1.6.0**
 
 This repository hosts the full stack implementation of the RITUAL web application. Development rules are defined in `AGENTS.md`, which outlines mandatory practices and versioning guidelines. Earlier planning files such as `pickup.json` and all Python sources have been removed; their history remains in the git log and `CHANGELOG.md`.
 
@@ -85,8 +85,6 @@ The backend currently supports the following operations:
 - `GET /clubs` – list venue profiles
 - `GET /profiles/{id}` – get a single public profile
 - `GET /clubs/{id}/events` – list events for a club
-- `POST /convert` – convert uploaded or text EDI data to JSON
-- `GET /sample/{filename}` – retrieve a predefined EDI sample file
 
 Registration and event creation endpoints validate input and return helpful
 HTTP 400 messages when required fields are missing or incorrectly formatted.
