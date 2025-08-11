@@ -1,6 +1,6 @@
 # RITUAL Web App
 
-**Version 1.6.1**
+**Version 1.7.1**
 
 This repository hosts the full stack implementation of the RITUAL web application. Development rules are defined in `AGENTS.md`, which outlines mandatory practices and versioning guidelines. Earlier planning files such as `pickup.json` and all Python sources have been removed; their history remains in the git log and `CHANGELOG.md`.
 
@@ -12,13 +12,7 @@ This repository hosts the full stack implementation of the RITUAL web applicatio
 npm install
 ```
 
-2. Run tests (a fallback JWT secret is supplied automatically):
-
-```bash
-npm test
-```
-
-3. Copy `.env.example` to `.env` and adjust the values:
+2. Copy `.env.example` to `.env` and adjust the values:
 
 ```bash
 cp .env.example .env
@@ -26,19 +20,50 @@ cp .env.example .env
 
 Set `JWT_SECRET` (required— the server will not start without it) and optionally `PORT` in the `.env` file.
 
-4. Start the development server:
+3. Run the backend test suite (a fallback JWT secret is supplied automatically):
 
 ```bash
-node src/server.js
+npm test
 ```
 
 SQLite now enforces foreign key constraints and uses `ON DELETE CASCADE` so related profiles, events and bookings are automatically removed when a user or event is deleted.
 As a result, tests reset the database by deleting from `users`, which cascades to all dependent tables.
 
-You can also build and run the service with Docker:
+## Running the Development Servers
+
+### Backend
+
+Start the Express API once the tests pass:
+
+```bash
+node src/server.js
+```
+
+The server listens on the port defined in `.env` (default `3000`). You can also build and run the service with Docker:
 
 ```bash
 docker compose up --build
+```
+
+### Frontend
+
+Launch a lightweight server for the React frontend in a separate terminal:
+
+```bash
+cd frontend
+npm install
+npx serve -l 5173
+```
+
+Then open <http://localhost:5173> in your browser. The app will proxy API requests to the backend at `http://localhost:3000`.
+
+## Testing
+
+Run tests for both layers before committing:
+
+```bash
+npm test                   # backend
+cd frontend && npm test    # frontend
 ```
 
 ## Development Guidelines
@@ -54,13 +79,9 @@ Adhere to the project LAWS in `AGENTS.md` and the following conventions:
 
 Static pages for operational testing live in the `public` directory. Open `public/index.html` in a browser while the server is running to interact with the API.
 
-The React application under `frontend` now offers the same features with a richer interface. Users can edit their entire profile, browse all artists or venues and view public profiles. Information persists so details remain after logging out and back in.
+The React application under `frontend` now mirrors those features with a modern, responsive design. The navigation bar collapses into a mobile-friendly hamburger menu and all forms scale cleanly across screen sizes. Users can edit their entire profile, browse all artists or venues and view public profiles. Information persists so details remain after logging out and back in.
 
-Install the frontend dependencies and run its tests with:
-
-```bash
-cd frontend && npm install && npm test
-```
+To develop the frontend, follow the steps in [Running the Development Servers](#running-the-development-servers) and consult the [Testing](#testing) section for how to execute its Jest suite.
 
 
 ## Web-Based Test Runner
@@ -93,6 +114,13 @@ The backend currently supports the following operations:
 - `GET /clubs` – list venue profiles
 - `GET /profiles/{id}` – get a single public profile
 - `GET /clubs/{id}/events` – list events for a club
+- `POST /payments/checkout` – simulate payment processing
+- `GET /analytics/summary` – retrieve basic in-memory metrics
+- `POST /notifications/email` – stub endpoint acknowledging email requests
+- `GET /recommendations` – sample AI-generated event suggestions
+- `GET /rewards/{userId}` – mock blockchain token balance
+
+These experimental endpoints return mock data and serve as placeholders for future integrations.
 
 Registration and event creation endpoints validate input and return helpful
 HTTP 400 messages when required fields are missing or incorrectly formatted.
