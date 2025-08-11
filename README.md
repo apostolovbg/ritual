@@ -1,6 +1,6 @@
 # RITUAL Web App
 
-**Version 1.5.2**
+**Version 1.6.0**
 
 This repository hosts the full stack implementation of the RITUAL web application. Development rules are defined in `AGENTS.md`, which outlines mandatory practices and versioning guidelines. Earlier planning files such as `pickup.json` and all Python sources have been removed; their history remains in the git log and `CHANGELOG.md`.
 
@@ -12,7 +12,7 @@ This repository hosts the full stack implementation of the RITUAL web applicatio
 npm install
 ```
 
-2. Run tests:
+2. Run tests (a fallback JWT secret is supplied automatically):
 
 ```bash
 npm test
@@ -83,6 +83,9 @@ The backend currently supports the following operations:
 - `GET /clubs` – list venue profiles
 - `GET /profiles/{id}` – get a single public profile
 - `GET /clubs/{id}/events` – list events for a club
+
+Registration and event creation endpoints validate input and return helpful
+HTTP 400 messages when required fields are missing or incorrectly formatted.
 
 ## Development History
 
