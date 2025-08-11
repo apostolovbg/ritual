@@ -20,6 +20,10 @@ All notable changes to this project will be documented in this file.
 ### Changed
 - Updated documentation and version numbers for phases 4–6 progress.
 
+## [1.7.1] - 2025-08-11
+### Changed
+- Expanded documentation with detailed guides for running development servers and testing the frontend.
+
 ## [1.3.0] - 2025-07-24
 ### Added
 - Static `public` directory with `index.html` and JavaScript for manual API testing.
