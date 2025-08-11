@@ -32,6 +32,8 @@ Set `JWT_SECRET` (required— the server will not start without it) and optional
 node src/server.js
 ```
 
+SQLite now enforces foreign key constraints, preventing records from referencing non-existent parents.
+
 You can also build and run the service with Docker:
 
 ```bash
