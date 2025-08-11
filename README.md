@@ -33,7 +33,7 @@ node src/server.js
 ```
 
 SQLite now enforces foreign key constraints, preventing records from referencing non-existent parents.
-Test suites clear bookings, events and profile tables before removing users to respect these constraints.
+Test suites clear the database in dependency order—bookings, events, artist profiles, club profiles, then users—to respect these constraints.
 
 You can also build and run the service with Docker:
 
