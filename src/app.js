@@ -5,7 +5,6 @@ import jwt from 'jsonwebtoken';
 import { initDb } from './db.js';
 import users from './routes/users.js';
 import events from './routes/events.js';
-import edi from './routes/edi.js';
 
 const app = express();
 // Accept JSON bodies from API clients
@@ -17,7 +16,6 @@ export const dbPromise = initDb();
 // Mount feature-specific routers
 app.use(users);
 app.use(events);
-app.use(edi);
 
 // Export the configured Express app for use by the server and tests
 export default app;

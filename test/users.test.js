@@ -3,11 +3,9 @@ import app, { dbPromise } from '../src/app.js';
 
 beforeAll(async () => {
   const db = await dbPromise;
-  await db.exec('DELETE FROM bookings');
-  await db.exec('DELETE FROM events');
+  await db.exec('DELETE FROM users');
   await db.exec('DELETE FROM artist_profiles');
   await db.exec('DELETE FROM club_profiles');
-  await db.exec('DELETE FROM users');
 });
 
 let token;
